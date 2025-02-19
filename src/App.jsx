@@ -17,7 +17,7 @@ function App() {
           />
         </div>
 
-        <div className="w-1/2 flex flex-col p-4 bg-white p-6">
+        <div className="w-1/2 flex items-center justify-center flex-col p-4 bg-white p-6">
           <form className="w-3/4 space-y-4 mt-4">
             <p className="text-2xl font-bold mt-6 mb-6 text-center">
               Create Account
