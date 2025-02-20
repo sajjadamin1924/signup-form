@@ -5,65 +5,92 @@ import { Eye, EyeOff } from "lucide-react";
 function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
   });
 
-  // Handle input changes and update form data
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     setFormData({
       ...formData,
       [name]: value,
     });
+
+    let newErrors = { ...errors };
+    if (name === "name") {
+      if (value === "") {
+        newErrors.name = "Full Name is required";
+      } else {
+        newErrors.name = "";
+      }
+    }
+
+    if (name === "email") {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (value === "") {
+        newErrors.email = "Email is required";
+      } else if (!emailRegex.test(value)) {
+        newErrors.email = "Please enter a valid email";
+      } else {
+        newErrors.email = "";
+      }
+    }
+
+    if (name === "password") {
+      if (value === "") {
+        newErrors.password = "Password is required";
+      } else if (value.length < 6) {
+        newErrors.password = "Password must be at least 6 characters";
+      } else {
+        newErrors.password = "";
+      }
+    }
+
+    setErrors(newErrors);
   };
 
-  // Validate form fields
+
   const validateForm = () => {
     let isValid = true;
     let newErrors = {};
 
-    // Validate Full Name
     if (!formData.name) {
-      newErrors.name = "Full Name is required"; // Set error if empty
+      newErrors.name = "Full Name is required";
       isValid = false;
     }
 
-   
+
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!formData.email) {
-      newErrors.email = "Email is required"; 
+      newErrors.email = "Email is required";
       isValid = false;
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address"; 
-      isValid = false;
+      newErrors.email = "Please enter a valid email address";
+      isValid = true;
     }
 
-    
     if (!formData.password) {
-      newErrors.password = "Password is required"; 
+      newErrors.password = "Password is required";
       isValid = false;
     } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters"; 
+      newErrors.password = "Password must be at least 6 characters";
       isValid = false;
     }
 
-   
     setErrors(newErrors);
     return isValid;
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-    
       console.log("Form submitted", formData);
     }
   };
@@ -80,7 +107,7 @@ function App() {
           />
         </div>
 
-        <div className="w-1/2 flex items-center justify-center flex-col p-4 bg-white p-6">
+        <div className="w-1/2 flex items-center justify-center flex-col  bg-white p-6">
           <form className="w-3/4 space-y-4 mt-4" onSubmit={handleSubmit}>
             <p className="text-2xl font-bold mt-6 mb-6 text-center">
               Create Account
@@ -101,10 +128,13 @@ function App() {
                 className="w-full p-3 pl-12 border border-gray-600 rounded-3xl"
                 placeholder="Enter Your Name"
               />
+              {errors.name && (
+                <p className="text-red-600 text-sm absolute top-12 left-4">
+                  {errors.name}
+                </p>
+              )}
             </div>
-            {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>} 
 
-           
             <label className="block text-gray-600 mb-1">Email</label>
             <div className="relative flex items-center w-full">
               <img
@@ -120,10 +150,11 @@ function App() {
                 className="w-full p-3 pl-12 border border-gray-600 rounded-3xl"
                 placeholder="Enter Your Email"
               />
+              {errors.email && (
+                <p className="text-red-600 text-sm absolute top-12 left-4">{errors.email}</p>
+              )}
             </div>
-            {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>} 
 
-           
             <label className="block text-gray-600 mb-1">Password</label>
             <div className="relative flex items-center w-full">
               <img
@@ -136,6 +167,7 @@ function App() {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
+                maxLength={"10"}
                 className="w-full p-3 pl-12 border border-gray-600 rounded-3xl"
                 placeholder="Enter Your Password"
               />
@@ -146,12 +178,12 @@ function App() {
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
+              {errors.password && (
+                <p className="text-red-600 text-sm absolute top-12 left-4">{errors.password}</p>
+              )}
             </div>
-            {errors.password && (
-              <p className="text-red-600 text-sm">{errors.password}</p>
-            )} 
 
-            
+
             <button
               type="submit"
               className="w-full flex items-center justify-center bg-[#73885d] text-white font-bold py-2 px-4 rounded-3xl mt-18 cursor-pointer"
