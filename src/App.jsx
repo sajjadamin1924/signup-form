@@ -2,8 +2,10 @@ import "./App.css";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
+
 function App() {
   const [showPassword, setShowPassword] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -91,7 +93,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted", formData);
+      setModalVisible(true);
     }
   };
 
@@ -186,10 +188,24 @@ function App() {
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center bg-[#73885d] text-white font-bold py-2 px-4 rounded-3xl mt-18 cursor-pointer"
+              className="w-full flex items-center justify-center bg-[#73885d] text-white font-bold py-2 px-4 rounded-3xl mt-18 cursor-pointer hover:bg-[#738854]/90"
+              onClick={() => setModalVisible(true)}
             >
               Sign Up
             </button>
+            {modalVisible && (
+              <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[1px]  "
+                onClick={() => setModalVisible(false)}>
+                <div className="bg-white p-6 rounded-xl shadow-xl relative w-1/3">
+                  <button className="absolute top-4 right-4" onClick={() => setModalVisible(false)}>
+                    X
+                  </button>
+                  <h2 className="text-2xl font-bold mb-4">Sign Up Successful</h2>
+                  <p>Welcome, {formData.name}!</p>
+                </div>
+              </div>
+            )}
+
             <center>
               <p className="items-center justify-center">-OR-</p>
             </center>
@@ -218,8 +234,8 @@ function App() {
               </div>
             </div>
           </form>
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   );
 }
