@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { CircleX } from "lucide-react";
 
 
 function App() {
@@ -92,8 +93,8 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      setModalVisible(true);
+    if (!validateForm()) {
+      setModalVisible(false);
     }
   };
 
@@ -198,7 +199,7 @@ function App() {
                 onClick={() => setModalVisible(false)}>
                 <div className="bg-white p-6 rounded-xl shadow-xl relative w-1/3">
                   <button className="absolute top-4 right-4" onClick={() => setModalVisible(false)}>
-                    X
+                    <CircleX />
                   </button>
                   <h2 className="text-2xl font-bold mb-4">Sign Up Successful</h2>
                   <p>Welcome, {formData.name}!</p>
