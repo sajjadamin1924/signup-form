@@ -110,7 +110,7 @@ function App() {
           />
         </div>
 
-        <div className="w-1/2 flex items-center justify-center flex-col  bg-white p-6">
+        <div className="w-1/2 flex items-center justify-center flex-col bg-white p-6" >
           <form className="w-3/4 space-y-4 mt-4" onSubmit={handleSubmit}>
             <p className="text-2xl font-bold mt-6 mb-6 text-center">
               Create Account
@@ -195,8 +195,9 @@ function App() {
               Sign Up
             </button>
             {modalVisible && (
-              <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[1px]  "
-                onClick={() => setModalVisible(false)}>
+              <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[1px] hover:bg-[#000]/90"
+
+              >
                 <div className="bg-white p-6 rounded-xl shadow-xl relative w-1/3">
                   <button className="absolute top-4 right-4" onClick={() => setModalVisible(false)}>
                     <CircleX />
