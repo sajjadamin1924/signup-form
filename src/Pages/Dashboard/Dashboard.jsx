@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../Components/Header";
 import { faSquareCaretUp } from "@fortawesome/free-solid-svg-icons/faSquareCaretUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,45 +12,55 @@ import { faFileLines } from "@fortawesome/free-solid-svg-icons";
 import Card from "../../Components/Card";
 
 const Dashboard = () => {
+  const [selectedLevel,setSelectedLevel] = useState('All Level');
 
   const cardsData = [
     {
       title: "5 baj gaye hain",
       button1: "beginner",
       time: "12 mins",
-      button2: "Sample Question"
+      button2: "Sample Question",
+      level:"Entry level"
     },
     {
       title: "Accountancy",
       button1: "beginner",
       time: "30 mins",
-      button2: "Sample Question"
+      button2: "Sample Question",
+      level:"Entry level"
     },
     {
       title: "Accounting level 1",
       button1: "beginner",
       time: "45 mins",
-      button2: "Sample Question"
+      button2: "Sample Question",
+      level:"Entry level"
     },
     {
       title: "Agile ways of working L1",
       button1: "beginner",
       time: "12 mins",
-      button2: "Sample Question"
+      button2: "Sample Question",
+      level:"Entry level"
     },
     {
       title: "Basic to beginner changewww",
       button1: "beginner",
       time: "12 mins",
-      button2: "Sample Question"
+      button2: "Sample Question",
+      level:"Entry level"
     },
     {
       title: "cropped images checking",
       button1: "beginner",
       time: "12 mins",
-      button2: "Sample Question"
+      button2: "Sample Question",
+      level:"Entry level"
     },
   ]
+  const filteredCards = cardsData.filter((card) => {
+    return selectedLevel === "All Level" || card.level === selectedLevel;
+  });
 
   return (
     <>
@@ -89,10 +99,10 @@ const Dashboard = () => {
               <FontAwesomeIcon className="text-xl mb-6" icon={faSquareCaretUp} />
             </div>
             <div className="grid grid-flow-col grid-rows-2 gap-4 mt-4 p-4">
-              <button className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">Entry Level</button>
-              <button className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl ">Mid Level</button>
-              <button className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">Senior Level</button>
-              <button className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">All Level</button>
+              <button  onClick={() => setSelectedLevel("Entry Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">Entry Level</button>
+              <button onClick={() => setSelectedLevel("Mid Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl ">Mid Level</button>
+              <button onClick={()=> setSelectedLevel("Senior Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">Senior Level</button>
+              <button onClick={() => setSelectedLevel("All Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">All Level</button>
             </div>
             <hr />
             <div className="flex justify-between items-center px-4 mt-4">
@@ -130,12 +140,16 @@ const Dashboard = () => {
               <h1 className="px-4 text-2xl">28 Modules in English</h1>
             </div>
             <div className="grid grid-flow-col grid-rows-2 gap-6 mt-4 px-6">
-              {
-                cardsData.length > 0 && cardsData.map((card) => (
-                  <Card title={card.title} button1={card.button1} time={card.time} button2={card.button2} />
-                ))
-              }
-
+              {filteredCards.length > 0 &&
+                filteredCards.map((card, index) => (
+                  <Card
+                    key={index}
+                    title={card.title}
+                    button1={card.button1}
+                    time={card.time}
+                    button2={card.button2}
+                  />
+                ))}
             </div>
           </div>
         </div>
