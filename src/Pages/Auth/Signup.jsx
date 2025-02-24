@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { CircleX } from "lucide-react";
@@ -93,6 +92,7 @@ const Signup = () => {
     e.preventDefault();
     if (!validateForm()) {
       setModalVisible(false);
+
     }
   };
   return (
@@ -191,6 +191,8 @@ const Signup = () => {
               type="submit"
               className="w-full flex items-center justify-center bg-[#73885d] text-white font-bold py-2 px-4 rounded-3xl mt-18 cursor-pointer hover:bg-[#738854]/90"
               onClick={() => setModalVisible(true)}
+
+
             >
               Sign Up
             </button>

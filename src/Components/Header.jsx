@@ -15,7 +15,7 @@ const Header = () => {
       </div>
       <div className="flex">
         <nav>
-          <ul className="flex justify-between w-full">
+          <ul className="flex justify-between w-full space-x-4">
             <li className="p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A] hover:text-[#C0FF06]">
               <FontAwesomeIcon className="mr-2" icon={faMicrosoft} />
               My Tests
