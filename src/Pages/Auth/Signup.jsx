@@ -2,8 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { CircleX } from "lucide-react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -90,9 +92,11 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // navigate("/dashboard")
     if (!validateForm()) {
       setModalVisible(false);
-
+    } else {
+      navigate('dashboard')
     }
   };
   return (
