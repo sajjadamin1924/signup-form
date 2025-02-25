@@ -92,7 +92,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // navigate("/dashboard")
+
     if (!validateForm()) {
       setModalVisible(false);
     } else {

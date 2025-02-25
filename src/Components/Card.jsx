@@ -7,7 +7,7 @@ import React from 'react';
 const Card = ({ title, time, button1, button2 }) => {
   return (
     <div>
-      <div className="card bg-[#F6F7F7] px-4 p-4 w-96 h-60">
+      <div className="card bg-[#F6F7F7] px-4 p-4">
         <div className="flex justify-between" >
           <div>
             <h1 className='text-sm font-bold'>{title}</h1>
