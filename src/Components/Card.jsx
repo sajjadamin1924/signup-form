@@ -13,7 +13,7 @@ const Card = ({ title, time, button1, button2 }) => {
             <h1 className='text-sm font-bold'>{title}</h1>
           </div>
           <div>
-            <button className="px-4 text-lg border-2 border-gray-600 rounded-2xl cursor-pointer">{button1}</button>
+            <button className=" flex px-4 text-lg border-2 border-gray-600 rounded-2xl cursor-pointer items-center justify-center">{button1}</button>
           </div>
         </div>
         <div>

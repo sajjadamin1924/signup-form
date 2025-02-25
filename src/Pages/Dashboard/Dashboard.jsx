@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
 import { faSquareCaretUp } from "@fortawesome/free-solid-svg-icons/faSquareCaretUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,53 +12,122 @@ import { faFileLines } from "@fortawesome/free-solid-svg-icons";
 import Card from "../../Components/Card";
 
 const Dashboard = () => {
-  const [selectedLevel,setSelectedLevel] = useState('All Level');
+  const [data, setData] = useState([]);
+  const [inputString, setInputString] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState('All Level');
+  const handleOnChange = (event) => {
+
+    setInputString(event.target.value);
+  }
 
   const cardsData = [
     {
       title: "5 baj gaye hain",
-      button1: "beginner",
+      button1: "Entry",
       time: "12 mins",
       button2: "Sample Question",
-      level:"Entry level"
+      level: "Entry Level"
     },
     {
       title: "Accountancy",
-      button1: "beginner",
+      button1: "Entry",
       time: "30 mins",
       button2: "Sample Question",
-      level:"Entry level"
+      level: "Entry Level"
     },
     {
       title: "Accounting level 1",
-      button1: "beginner",
+      button1: "Entry",
       time: "45 mins",
       button2: "Sample Question",
-      level:"Entry level"
+      level: "Entry Level"
     },
+
     {
       title: "Agile ways of working L1",
-      button1: "beginner",
+      button1: "Senior",
       time: "12 mins",
       button2: "Sample Question",
-      level:"Entry level"
+      level: "Senior Level"
     },
     {
       title: "Basic to beginner changewww",
-      button1: "beginner",
+      button1: "Senior",
       time: "12 mins",
       button2: "Sample Question",
-      level:"Entry level"
+      level: "Senior Level"
     },
     {
       title: "cropped images checking",
-      button1: "beginner",
+      button1: "Senior",
       time: "12 mins",
       button2: "Sample Question",
-      level:"Entry level"
+      level: "Senior Level"
+    },
+    {
+      title: "cropped images checking",
+      button1: "Senior",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Senior Level"
+    },
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level"
+    }, {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level"
+    }, {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level"
+    }, {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level"
+    }, {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level"
+    }, {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+
+
     },
   ]
-  const filteredCards = cardsData.filter((card) => {
+
+  useEffect(() => {
+    setData(cardsData);
+
+    if (inputString !== "") {
+
+
+      let filtered = cardsData.filter((card) => {
+
+        return card?.title.includes(inputString)
+      })
+      setData(filtered)
+    }
+  }, [inputString]);
+
+
+  const filteredCards = data.filter((card) => {
     return selectedLevel === "All Level" || card.level === selectedLevel;
   });
 
@@ -77,6 +146,7 @@ const Dashboard = () => {
                 className="bg-white p-2 px-4 border-2 border-black rounded-md text-xl"
                 type="text"
                 placeholder="Search module here..."
+                onChange={handleOnChange}
 
               />
               <FontAwesomeIcon icon={faMagnifyingGlass}
@@ -99,10 +169,29 @@ const Dashboard = () => {
               <FontAwesomeIcon className="text-xl mb-6" icon={faSquareCaretUp} />
             </div>
             <div className="grid grid-flow-col grid-rows-2 gap-4 mt-4 p-4">
-              <button  onClick={() => setSelectedLevel("Entry Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">Entry Level</button>
-              <button onClick={() => setSelectedLevel("Mid Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl ">Mid Level</button>
-              <button onClick={()=> setSelectedLevel("Senior Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">Senior Level</button>
-              <button onClick={() => setSelectedLevel("All Level")} className="bg-[#F6F7F7] p-4 rounded-xl hover:bg-[#F6F7F7]/90 text-xl">All Level</button>
+              <button
+                onClick={() => setSelectedLevel("Entry Level")}
+                className={`
+             ${selectedLevel === 'Entry Level' ? 'bg-black text-white hover:bg-blue-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
+             p-4 rounded-xl text-xl 
+            `}
+              >
+                Entry Level
+              </button>
+
+              <button onClick={() => setSelectedLevel("Mid Level")} className={`
+             ${selectedLevel === 'Mid Level' ? 'bg-black text-white hover:bg-amber-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
+             p-4 rounded-xl text-xl 
+            `}
+              >Mid Level</button>
+              <button onClick={() => setSelectedLevel("Senior Level")} className={`
+             ${selectedLevel === 'Senior Level' ? 'bg-black text-white hover:bg-red-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
+             p-4 rounded-xl  text-xl 
+            `}>Senior Level</button>
+              <button onClick={() => setSelectedLevel("All Level")} className={`
+             ${selectedLevel === 'All Level' ? 'bg-black text-white hover:bg-green-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
+             p-4 rounded-xl text-xl 
+            `}>All Level</button>
             </div>
             <hr />
             <div className="flex justify-between items-center px-4 mt-4">
@@ -122,15 +211,15 @@ const Dashboard = () => {
             </div>
 
             <div className="px-6">
-              <ul className="text-xl p-4">
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Accountancy</li>
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Banking</li>
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Corporate Finance</li>
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Dexta Launch Industry 1</li>
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Farzan Code</li>
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Farzan Meta</li>
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Hedge Funds</li>
-                <li><input type="checkbox" className="w-5 h-5 mr-2 text-blue-600 bg-gray-100 rounded-sm" />Investment Banking</li>
+              <ul className="text-lg p-2">
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Accountancy</li>
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Corporate Finance</li>
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Dexta Launch Industry 1</li>
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Farzan Code</li>
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Farzan Meta</li>
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Hedge Funds</li>
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Investment Banking</li>
+                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Banking</li>
               </ul>
             </div>
           </div>
@@ -139,8 +228,9 @@ const Dashboard = () => {
             <div>
               <h1 className="px-4 text-2xl">28 Modules in English</h1>
             </div>
-            <div className="grid grid-flow-col grid-rows-2 gap-6 mt-4 px-6">
-              {filteredCards.length > 0 &&
+            <div className="grid grid-flow-row grid-rows-1 grid-cols-4 gap-6 mt-4 px-6 w-full">
+
+              {filteredCards.length > 0 ?
                 filteredCards.map((card, index) => (
                   <Card
                     key={index}
@@ -149,8 +239,9 @@ const Dashboard = () => {
                     time={card.time}
                     button2={card.button2}
                   />
-                ))}
+                )) : (<p className="text-3xl">No Data</p>)}
             </div>
+
           </div>
         </div>
 
