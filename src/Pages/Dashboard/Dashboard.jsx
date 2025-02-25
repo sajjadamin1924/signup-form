@@ -2,23 +2,40 @@ import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
 import { faSquareCaretUp } from "@fortawesome/free-solid-svg-icons/faSquareCaretUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleCheck,
-  faMagnifyingGlass,
-
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faFileLines } from "@fortawesome/free-solid-svg-icons";
 
 import Card from "../../Components/Card";
 
 const Dashboard = () => {
+  const [industrySearch, setIndustrySearch] = useState("");
   const [data, setData] = useState([]);
   const [inputString, setInputString] = useState("");
-  const [selectedLevel, setSelectedLevel] = useState('All Level');
-  const handleOnChange = (event) => {
+  const [selectedLevel, setSelectedLevel] = useState("All Level");
+  const [checkedIndustries, setCheckedIndustries] = useState([]);
 
+  const handleOnChange = (event) => {
     setInputString(event.target.value);
-  }
+  };
+  
+  const handleIndustrySearchChange = (event) => {
+    setIndustrySearch(event.target.value);
+  };
+
+  const industries = [
+    "Accountancy",
+    "Corporate Finance",
+    "Dexta Launch Industry 1",
+    "Farzan Code",
+    "Farzan Meta",
+    "Hedge Funds",
+    "Investment Banking",
+    "Banking",
+  ];
+
+  const filteredIndustries = industries.filter((industry) =>
+    industry.toLowerCase().includes(industrySearch.toLowerCase())
+  );
 
   const cardsData = [
     {
@@ -26,21 +43,24 @@ const Dashboard = () => {
       button1: "Entry",
       time: "12 mins",
       button2: "Sample Question",
-      level: "Entry Level"
+      level: "Entry Level",
+      industry: "Accountancy"
     },
     {
-      title: "Accountancy",
+      title: "Accountancy level 1",
       button1: "Entry",
       time: "30 mins",
       button2: "Sample Question",
-      level: "Entry Level"
+      level: "Entry Level",
+      industry: "Corporate Finance"
     },
     {
       title: "Accounting level 1",
       button1: "Entry",
       time: "45 mins",
       button2: "Sample Question",
-      level: "Entry Level"
+      level: "Entry Level",
+      industry:"Dexta Launch Industry 1"
     },
 
     {
@@ -48,88 +68,115 @@ const Dashboard = () => {
       button1: "Senior",
       time: "12 mins",
       button2: "Sample Question",
-      level: "Senior Level"
+      level: "Senior Level",
+      industry:"Dexta Launch Industry 1"
     },
     {
       title: "Basic to beginner changewww",
       button1: "Senior",
       time: "12 mins",
       button2: "Sample Question",
-      level: "Senior Level"
+      level: "Senior Level",
+      industry:"Farzan Code"
     },
     {
       title: "cropped images checking",
       button1: "Senior",
       time: "12 mins",
       button2: "Sample Question",
-      level: "Senior Level"
+      level: "Senior Level",
+       industry:"Farzan Meta"
     },
     {
       title: "cropped images checking",
       button1: "Senior",
       time: "12 mins",
       button2: "Sample Question",
-      level: "Senior Level"
+      level: "Senior Level",
+      industry:"Hedge Funds"
     },
     {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level"
-    }, {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level"
-    }, {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level"
-    }, {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level"
-    }, {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level"
-    }, {
       title: "cropped images checking",
       button1: "Mid",
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
-
-
+      industry:"Investment Banking"
     },
-  ]
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+      industry:"Banking"
+    },
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+    },
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+    },
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+      industry:"Farzan Meta"
+      
+    },
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+      industry:"Banking"
+    },
+  ];
 
   useEffect(() => {
     setData(cardsData);
 
     if (inputString !== "") {
-
-
       let filtered = cardsData.filter((card) => {
-
-        return card?.title.includes(inputString)
-      })
-      setData(filtered)
+        return card?.title.includes(inputString);
+      });
+      setData(filtered);
     }
   }, [inputString]);
 
-
+  
   const filteredCards = data.filter((card) => {
-    return selectedLevel === "All Level" || card.level === selectedLevel;
+    const levelMatches = selectedLevel === "All Level" || card.level === selectedLevel;
+    const industryMatches = checkedIndustries.length === 0 || checkedIndustries.includes(card.industry);
+    return levelMatches && industryMatches;
   });
+
+  const handleIndustryCheckboxChange = (industry) => {
+    setCheckedIndustries((prevChecked) => {
+      if (prevChecked.includes(industry)) {
+        return prevChecked.filter((item) => item !== industry);
+      } else {
+        return [...prevChecked, industry];
+      }
+    });
+  };
+
+  const resetFilters = () => {
+    setCheckedIndustries([]);
+    setIndustrySearch("");
+    setSelectedLevel("All Level");
+  };
 
   return (
     <>
@@ -147,10 +194,11 @@ const Dashboard = () => {
                 type="text"
                 placeholder="Search module here..."
                 onChange={handleOnChange}
-
               />
-              <FontAwesomeIcon icon={faMagnifyingGlass}
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-500 px-2" />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-500 px-2"
+              />
             </div>
             <div>
               <button className="p-2 px-4 bg-[#C0FF06] ml-4 text-xl border-2  border-black rounded-md">
@@ -159,7 +207,6 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-
         </div>
 
         <div className="w-full flex gap-6 p-6 bg-[#F6F7F7]">
@@ -171,27 +218,45 @@ const Dashboard = () => {
             <div className="grid grid-flow-col grid-rows-2 gap-4 mt-4 p-4">
               <button
                 onClick={() => setSelectedLevel("Entry Level")}
-                className={`
-             ${selectedLevel === 'Entry Level' ? 'bg-black text-white hover:bg-blue-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
-             p-4 rounded-xl text-xl 
-            `}
+                className={`${
+                  selectedLevel === "Entry Level"
+                    ? "bg-black text-white hover:bg-blue-600 cursor-pointer"
+                    : "bg-[#F6F7F7] text-black cursor-pointer"
+                } p-4 rounded-xl text-xl`}
               >
                 Entry Level
               </button>
 
-              <button onClick={() => setSelectedLevel("Mid Level")} className={`
-             ${selectedLevel === 'Mid Level' ? 'bg-black text-white hover:bg-amber-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
-             p-4 rounded-xl text-xl 
-            `}
-              >Mid Level</button>
-              <button onClick={() => setSelectedLevel("Senior Level")} className={`
-             ${selectedLevel === 'Senior Level' ? 'bg-black text-white hover:bg-red-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
-             p-4 rounded-xl  text-xl 
-            `}>Senior Level</button>
-              <button onClick={() => setSelectedLevel("All Level")} className={`
-             ${selectedLevel === 'All Level' ? 'bg-black text-white hover:bg-green-600 cursor-pointer' : 'bg-[#F6F7F7] text-black cursor-pointer'} 
-             p-4 rounded-xl text-xl 
-            `}>All Level</button>
+              <button
+                onClick={() => setSelectedLevel("Mid Level")}
+                className={`${
+                  selectedLevel === "Mid Level"
+                    ? "bg-black text-white hover:bg-amber-600 cursor-pointer"
+                    : "bg-[#F6F7F7] text-black cursor-pointer"
+                } p-4 rounded-xl text-xl`}
+              >
+                Mid Level
+              </button>
+              <button
+                onClick={() => setSelectedLevel("Senior Level")}
+                className={`${
+                  selectedLevel === "Senior Level"
+                    ? "bg-black text-white hover:bg-red-600 cursor-pointer"
+                    : "bg-[#F6F7F7] text-black cursor-pointer"
+                } p-4 rounded-xl text-xl`}
+              >
+                Senior Level
+              </button>
+              <button
+                onClick={() => setSelectedLevel("All Level")}
+                className={`${
+                  selectedLevel === "All Level"
+                    ? "bg-black text-white hover:bg-green-600 cursor-pointer"
+                    : "bg-[#F6F7F7] text-black cursor-pointer"
+                } p-4 rounded-xl text-xl`}
+              >
+                All Level
+              </button>
             </div>
             <hr />
             <div className="flex justify-between items-center px-4 mt-4">
@@ -203,6 +268,7 @@ const Dashboard = () => {
                 className="bg-white p-2 pr-10 border-2 border-black rounded-md text-xl w-full"
                 type="text"
                 placeholder="Search industry here..."
+                onChange={handleIndustrySearchChange}
               />
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
@@ -210,17 +276,30 @@ const Dashboard = () => {
               />
             </div>
 
-            <div className="px-6">
+            <div className="px-6 overflow-y-auto max-h-80">
               <ul className="text-lg p-2">
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Accountancy</li>
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Corporate Finance</li>
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Dexta Launch Industry 1</li>
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Farzan Code</li>
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Farzan Meta</li>
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Hedge Funds</li>
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Investment Banking</li>
-                <li className="p-2"><input type="checkbox" className="w-4 h-4 mr-2  text-blue-600 bg-gray-100 rounded-sm" />Banking</li>
+                {filteredIndustries.length > 0 ? (
+                  filteredIndustries.map((industry, index) => (
+                    <li className="p-2" key={index}>
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 mr-2 text-blue-600 bg-gray-100 rounded-sm"
+                        checked={checkedIndustries.includes(industry)}
+                        onChange={() => handleIndustryCheckboxChange(industry)}
+                      />
+                      {industry}
+                    </li>
+                  ))
+                ) : (
+                  <p>No matching industries</p>
+                )}
               </ul>
+              <button
+                onClick={resetFilters}
+                className="mt-4 px-4 py-2 bg-[#C0FF06] text-white rounded-md hover:bg-black w-full"
+              >
+                Reset Filters
+              </button>
             </div>
           </div>
 
@@ -228,9 +307,8 @@ const Dashboard = () => {
             <div>
               <h1 className="px-4 text-2xl">28 Modules in English</h1>
             </div>
-            <div className="grid grid-flow-row grid-rows-1 grid-cols-4 gap-6 mt-4 px-6 w-full">
-
-              {filteredCards.length > 0 ?
+            <div className="grid grid-flow-row grid-rows-1 grid-cols-4 gap-6 mt-4 px-6 w-full h-96 overflow-y-auto pr-4">
+              {filteredCards.length > 0 ? (
                 filteredCards.map((card, index) => (
                   <Card
                     key={index}
@@ -239,13 +317,13 @@ const Dashboard = () => {
                     time={card.time}
                     button2={card.button2}
                   />
-                )) : (<p className="text-3xl">No Data</p>)}
+                ))
+              ) : (
+                <p className="text-3xl">No Data</p>
+              )}
             </div>
-
           </div>
         </div>
-
-
       </div>
     </>
   );
