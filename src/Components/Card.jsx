@@ -9,14 +9,14 @@ const Card = ({ title, time, button1, button2 }) => {
           <div>
             <h1 className="text-sm font-bold">{title}</h1>
           </div>
-          <div className="items-center justify-center">
-            <button className=" flex px-4 text-lg border-3 border-green-600 rounded-2xl cursor-pointer items-center justify-center">
+          <div className="items-center ">
+            <button className=" flex px-4 text-lg border-3 border-green-600 rounded-2xl cursor-pointer">
               {button1}
             </button>
           </div>
         </div>
         <div>
-          <h1 className="mt-8 flex items-center">
+          <h1 className="mt-8 flex items-center text-gray-400">
             <FaRegClock className="mr-2" />
             {time}
           </h1>

@@ -10,9 +10,9 @@ import Card from "../../Components/Card";
 import { FaRegFileAlt } from "react-icons/fa";
 
 const Dashboard = () => {
-  const [industrySearch, setIndustrySearch] = useState("");
   const [data, setData] = useState([]);
   const [inputString, setInputString] = useState("");
+  const [industrySearch, setIndustrySearch] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("All Level");
   const [checkedIndustries, setCheckedIndustries] = useState([]);
 
@@ -318,7 +318,9 @@ const Dashboard = () => {
                     </li>
                   ))
                 ) : (
-                  <p>No matching industries</p>
+                  <p className="text-2xl text-red-600">
+                    your input does not match any industri
+                  </p>
                 )}
               </ul>
             </div>
