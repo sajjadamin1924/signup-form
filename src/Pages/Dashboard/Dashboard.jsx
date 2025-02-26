@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
-import { faSquareCaretUp } from "@fortawesome/free-solid-svg-icons/faSquareCaretUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { faFileLines } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleUp,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { FaRegCircleCheck } from "react-icons/fa6";
 
 import Card from "../../Components/Card";
+import { FaRegFileAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const [industrySearch, setIndustrySearch] = useState("");
@@ -17,7 +21,7 @@ const Dashboard = () => {
   const handleOnChange = (event) => {
     setInputString(event.target.value);
   };
-  
+
   const handleIndustrySearchChange = (event) => {
     setIndustrySearch(event.target.value);
   };
@@ -44,7 +48,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Entry Level",
-      industry: "Accountancy"
+      industry: "Accountancy",
     },
     {
       title: "Accountancy level 1",
@@ -52,7 +56,7 @@ const Dashboard = () => {
       time: "30 mins",
       button2: "Sample Question",
       level: "Entry Level",
-      industry: "Corporate Finance"
+      industry: "Corporate Finance",
     },
     {
       title: "Accounting level 1",
@@ -60,7 +64,7 @@ const Dashboard = () => {
       time: "45 mins",
       button2: "Sample Question",
       level: "Entry Level",
-      industry:"Dexta Launch Industry 1"
+      industry: "Dexta Launch Industry 1",
     },
 
     {
@@ -69,7 +73,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Senior Level",
-      industry:"Dexta Launch Industry 1"
+      industry: "Dexta Launch Industry 1",
     },
     {
       title: "Basic to beginner changewww",
@@ -77,7 +81,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Senior Level",
-      industry:"Farzan Code"
+      industry: "Farzan Code",
     },
     {
       title: "cropped images checking",
@@ -85,7 +89,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Senior Level",
-       industry:"Farzan Meta"
+      industry: "Farzan Meta",
     },
     {
       title: "cropped images checking",
@@ -93,7 +97,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Senior Level",
-      industry:"Hedge Funds"
+      industry: "Hedge Funds",
     },
     {
       title: "cropped images checking",
@@ -101,7 +105,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
-      industry:"Investment Banking"
+      industry: "Investment Banking",
     },
     {
       title: "cropped images checking",
@@ -109,7 +113,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
-      industry:"Banking"
+      industry: "Banking",
     },
     {
       title: "cropped images checking",
@@ -131,8 +135,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
-      industry:"Farzan Meta"
-      
+      industry: "Farzan Meta",
     },
     {
       title: "cropped images checking",
@@ -140,7 +143,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
-      industry:"Banking"
+      industry: "Banking",
     },
   ];
 
@@ -155,10 +158,12 @@ const Dashboard = () => {
     }
   }, [inputString]);
 
-  
   const filteredCards = data.filter((card) => {
-    const levelMatches = selectedLevel === "All Level" || card.level === selectedLevel;
-    const industryMatches = checkedIndustries.length === 0 || checkedIndustries.includes(card.industry);
+    const levelMatches =
+      selectedLevel === "All Level" || card.level === selectedLevel;
+    const industryMatches =
+      checkedIndustries.length === 0 ||
+      checkedIndustries.includes(card.industry);
     return levelMatches && industryMatches;
   });
 
@@ -183,8 +188,8 @@ const Dashboard = () => {
       <Header />
       <div>
         <div className="px-4 flex bg-[#F6F7F7] mt-6 justify-between pt-6 pb-8 items-center">
-          <h1 className="text-2xl font-bold px-4">
-            <FontAwesomeIcon className="mr-2 text-2xl" icon={faCircleCheck} />
+          <h1 className=" flex text-2xl font-bold px-4 items-center">
+            <FaRegCircleCheck className="mr-2 text-2xl" />
             Modules
           </h1>
           <div className="flex px-4">
@@ -201,8 +206,8 @@ const Dashboard = () => {
               />
             </div>
             <div>
-              <button className="p-2 px-4 bg-[#C0FF06] ml-4 text-xl border-2  border-black rounded-md">
-                <FontAwesomeIcon className="mr-2" icon={faFileLines} />
+              <button className=" flex items-center p-2 px-4 bg-[#C0FF06] ml-4 text-xl border-2  border-black rounded-md">
+                <FaRegFileAlt className="mr-2" />
                 Create new test
               </button>
             </div>
@@ -210,10 +215,13 @@ const Dashboard = () => {
         </div>
 
         <div className="w-full flex gap-6 p-6 bg-[#F6F7F7]">
-          <div className="w-1/4 bg-white p-6">
+          <div className="w-1/4 bg-white p-6 rounded-xl">
             <div className="flex justify-between items-center px-4">
               <h1 className="text-xl mb-6 font-bold">Experience Level</h1>
-              <FontAwesomeIcon className="text-xl mb-6" icon={faSquareCaretUp} />
+              <FontAwesomeIcon
+                className="text-xl  text-gray-400 mb-6"
+                icon={faAngleUp}
+              />
             </div>
             <div className="grid grid-flow-col grid-rows-2 gap-4 mt-4 p-4">
               <button
@@ -261,7 +269,10 @@ const Dashboard = () => {
             <hr />
             <div className="flex justify-between items-center px-4 mt-4">
               <h1 className="text-xl mb-6 font-bold">Industry</h1>
-              <FontAwesomeIcon className="text-2xl mb-6" icon={faSquareCaretUp} />
+              <FontAwesomeIcon
+                className="text-xl text-gray-400 mb-6"
+                icon={faAngleUp}
+              />
             </div>
             <div className="relative px-4">
               <input
@@ -276,7 +287,7 @@ const Dashboard = () => {
               />
             </div>
 
-            <div className="px-6 overflow-y-auto max-h-80">
+            <div className="px-6 overflow-y-auto max-h-80 relative">
               <ul className="text-lg p-2">
                 {filteredIndustries.length > 0 ? (
                   filteredIndustries.map((industry, index) => (
@@ -294,33 +305,36 @@ const Dashboard = () => {
                   <p>No matching industries</p>
                 )}
               </ul>
-              <button
-                onClick={resetFilters}
-                className="mt-4 px-4 py-2 bg-[#C0FF06] text-white rounded-md hover:bg-black w-full"
-              >
-                Reset Filters
-              </button>
             </div>
+
+            <button
+              onClick={resetFilters}
+              className="mt-4 px-4 py-2 bg-[#C0FF06]  bottom-0 text-white rounded-md hover:bg-black w-full"
+            >
+              Reset Filters
+            </button>
           </div>
 
-          <div className="w-3/4 bg-white p-6">
+          <div className="w-3/4 bg-white p-6 rounded-xl">
             <div>
               <h1 className="px-4 text-2xl">28 Modules in English</h1>
             </div>
-            <div className="grid grid-flow-row grid-rows-1 grid-cols-4 gap-6 mt-4 px-6 w-full h-96 overflow-y-auto pr-4">
-              {filteredCards.length > 0 ? (
-                filteredCards.map((card, index) => (
-                  <Card
-                    key={index}
-                    title={card.title}
-                    button1={card.button1}
-                    time={card.time}
-                    button2={card.button2}
-                  />
-                ))
-              ) : (
-                <p className="text-3xl">No Data</p>
-              )}
+            <div className="w-full max-h-[800px] overflow-y-auto ">
+              <div className="grid grid-flow-row grid-rows-1 grid-cols-4 gap-6 mt-4 px-6  ">
+                {filteredCards.length > 0 ? (
+                  filteredCards.map((card, index) => (
+                    <Card
+                      key={index}
+                      title={card.title}
+                      button1={card.button1}
+                      time={card.time}
+                      button2={card.button2}
+                    />
+                  ))
+                ) : (
+                  <p className="text-3xl">No Data</p>
+                )}
+              </div>
             </div>
           </div>
         </div>

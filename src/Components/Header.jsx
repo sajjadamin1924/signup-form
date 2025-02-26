@@ -1,9 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons/faQuestion";
-import { faMicrosoft } from "@fortawesome/free-brands-svg-icons";
-import { faCircleCheck, faUser } from "@fortawesome/free-solid-svg-icons";
+
 import { faSquareCaretDown } from "@fortawesome/free-solid-svg-icons/faSquareCaretDown";
+
+import { FaMicrosoft, FaRegCircleCheck, FaRegUser } from "react-icons/fa6";
 
 const Header = () => {
   return (
@@ -16,16 +17,16 @@ const Header = () => {
       <div className="flex">
         <nav>
           <ul className="flex justify-between w-full space-x-4">
-            <li className="p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A] hover:text-[#C0FF06]">
-              <FontAwesomeIcon className="mr-2" icon={faMicrosoft} />
+            <li className=" flex p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A] hover:text-[#C0FF06] items-center">
+              <FaMicrosoft className="mr-2" />
               My Tests
             </li>
-            <li className="p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A]  hover:text-[#C0FF06]">
-              <FontAwesomeIcon className="mr-2" icon={faUser} />
+            <li className=" flex p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A]  hover:text-[#C0FF06] items-center">
+              <FaRegUser className="mr-2" />
               My Candidates
             </li>
-            <li className="p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A]  hover:text-[#C0FF06]">
-              <FontAwesomeIcon className="mr-2" icon={faCircleCheck} />
+            <li className=" flex p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A]  hover:text-[#C0FF06] items-center">
+              <FaRegCircleCheck className="mr-2" />
               Modules
             </li>
           </ul>
