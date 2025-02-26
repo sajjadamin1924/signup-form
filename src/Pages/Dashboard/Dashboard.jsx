@@ -5,9 +5,7 @@ import {
   faAngleUp,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { FaRegCircleCheck } from "react-icons/fa6";
-
 import Card from "../../Components/Card";
 import { FaRegFileAlt } from "react-icons/fa";
 
@@ -121,6 +119,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
+      industry: "Hedge Funds",
     },
     {
       title: "cropped images checking",
@@ -128,6 +127,7 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
+      industry: "Accountancy",
     },
     {
       title: "cropped images checking",
@@ -143,7 +143,23 @@ const Dashboard = () => {
       time: "12 mins",
       button2: "Sample Question",
       level: "Mid Level",
-      industry: "Banking",
+      industry: "Accountancy",
+    },
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+      industry: "Accountancy",
+    },
+    {
+      title: "cropped images checking",
+      button1: "Mid",
+      time: "12 mins",
+      button2: "Sample Question",
+      level: "Mid Level",
+      industry: "Accountancy",
     },
   ];
 
@@ -307,12 +323,14 @@ const Dashboard = () => {
               </ul>
             </div>
 
-            <button
-              onClick={resetFilters}
-              className="mt-4 px-4 py-2 bg-[#C0FF06]  bottom-0 text-white rounded-md hover:bg-black w-full"
-            >
-              Reset Filters
-            </button>
+            {checkedIndustries.length > 0 && (
+              <button
+                onClick={resetFilters}
+                className="mt-4 px-4 py-2  bg-[#C0FF06]  bottom-0 text-gray-500 text-xl font-bold rounded-md hover:bg-[#252E3A] hover:text-white w-full"
+              >
+                Reset Filters
+              </button>
+            )}
           </div>
 
           <div className="w-3/4 bg-white p-6 rounded-xl">
