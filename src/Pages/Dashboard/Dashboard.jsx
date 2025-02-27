@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [selectedLevel, setSelectedLevel] = useState("All Level");
   const [checkedIndustries, setCheckedIndustries] = useState([]);
 
+
   const handleOnChange = (event) => {
     setInputString(event.target.value);
   };

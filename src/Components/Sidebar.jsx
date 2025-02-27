@@ -20,26 +20,37 @@ const Sidebar = ({
     if (savedLevel) {
       setSelectedLevel(savedLevel);
     }
-  }, [setSelectedLevel]);
+
+    const savedCheckedIndustries = localStorage.getItem("checkedIndustries");
+
+    if (savedCheckedIndustries) {
+      setCheckedIndustries(savedCheckedIndustries);
+    }
+  }, [setSelectedLevel, setCheckedIndustries]);
 
   const handleLevelSelection = (level) => {
     setSelectedLevel(level);
     localStorage.setItem("selectedLevel", level);
   };
 
+  const handleIndustryCheckboxChange = (industry) => {
+    setCheckedIndustries((prevChecked) => {
+      let updatedChecked;
+      if (prevChecked.includes(industry)) {
+        updatedChecked = prevChecked.filter((item) => item !== industry);
+      } else {
+        updatedChecked = [...prevChecked, industry];
+      }
+
+      localStorage.setItem("checkedIndustries", updatedChecked);
+
+      return updatedChecked;
+    });
+  };
+
   const filteredIndustries = industries.filter((industry) =>
     industry.toLowerCase().includes(industrySearch.toLowerCase())
   );
-
-  const handleIndustryCheckboxChange = (industry) => {
-    setCheckedIndustries((prevChecked) => {
-      if (prevChecked.includes(industry)) {
-        return prevChecked.filter((item) => item !== industry);
-      } else {
-        return [...prevChecked, industry];
-      }
-    });
-  };
 
   return (
     <div className="w-1/4 bg-white p-6 rounded-xl">
@@ -115,7 +126,13 @@ const Sidebar = ({
 
       {checkedIndustries.length > 0 && (
         <button
-          onClick={resetFilters}
+          onClick={() => {
+            localStorage.removeItem("checkedIndustries");
+            {
+              resetFilters;
+            }
+            setCheckedIndustries([]);
+          }}
           className="mt-4 px-4 py-2 bg-[#C0FF06] bottom-0 text-gray-500 text-xl font-bold rounded-md hover:bg-[#252E3A] hover:text-white w-full"
         >
           Reset Filters
