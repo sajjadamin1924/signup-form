@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleUp, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FaRegCircleCheck } from "react-icons/fa6";
+import {
+  faAngleUp,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = ({
   selectedLevel,
@@ -13,6 +15,18 @@ const Sidebar = ({
   setIndustrySearch,
   resetFilters,
 }) => {
+  useEffect(() => {
+    const savedLevel = localStorage.getItem("selectedLevel");
+    if (savedLevel) {
+      setSelectedLevel(savedLevel);
+    }
+  }, [setSelectedLevel]);
+
+  const handleLevelSelection = (level) => {
+    setSelectedLevel(level);
+    localStorage.setItem("selectedLevel", level);
+  };
+
   const filteredIndustries = industries.filter((industry) =>
     industry.toLowerCase().includes(industrySearch.toLowerCase())
   );
@@ -31,30 +45,39 @@ const Sidebar = ({
     <div className="w-1/4 bg-white p-6 rounded-xl">
       <div className="flex justify-between items-center px-4">
         <h1 className="text-xl mb-6 font-bold">Experience Level</h1>
-        <FontAwesomeIcon className="text-xl text-gray-400 mb-6" icon={faAngleUp} />
+        <FontAwesomeIcon
+          className="text-xl text-gray-400 mb-6"
+          icon={faAngleUp}
+        />
       </div>
       <div className="grid grid-flow-col grid-rows-2 gap-4 mt-4 p-4">
-        {["Entry Level", "Mid Level", "Senior Level", "All Level"].map((level) => (
-          <button
-            key={level}
-            onClick={() => setSelectedLevel(level)}
-            className={`${
-              selectedLevel === level
-                ? "bg-black text-white hover:bg-blue-600 cursor-pointer"
-                : "bg-[#F6F7F7] text-black cursor-pointer"
-            } p-4 rounded-xl text-xl`}
-          >
-            {level}
-          </button>
-        ))}
+        {["Entry Level", "Mid Level", "Senior Level", "All Level"].map(
+          (level) => (
+            <button
+              key={level}
+              onClick={() => handleLevelSelection(level)}
+              className={`${
+                selectedLevel === level
+                  ? "bg-black text-white hover:bg-blue-600 cursor-pointer"
+                  : "bg-[#F6F7F7] text-black cursor-pointer"
+              } p-4 rounded-xl text-xl`}
+            >
+              {level}
+            </button>
+          )
+        )}
       </div>
       <hr />
       <div className="flex justify-between items-center px-4 mt-4">
         <h1 className="text-xl mb-6 font-bold">Industry</h1>
-        <FontAwesomeIcon className="text-xl text-gray-400 mb-6" icon={faAngleUp} />
+        <FontAwesomeIcon
+          className="text-xl text-gray-400 mb-6"
+          icon={faAngleUp}
+        />
       </div>
       <div className="relative px-4">
         <input
+          name="Search"
           className="bg-white p-2 pr-10 border-2 border-black rounded-md text-xl w-full"
           type="text"
           placeholder="Search industry here..."
@@ -63,7 +86,7 @@ const Sidebar = ({
         />
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-500"
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 text-2xl text-gray-500"
         />
       </div>
 
@@ -73,8 +96,9 @@ const Sidebar = ({
             filteredIndustries.map((industry, index) => (
               <li className="p-2" key={index}>
                 <input
+                  name="checkbox"
                   type="checkbox"
-                  className="w-4 h-4 mr-2 text-blue-600 bg-gray-100 rounded-sm"
+                  className="accent-[#252E3A] text-[#C0FF06] w-4 h-4 mr-2 rounded-sm"
                   checked={checkedIndustries.includes(industry)}
                   onChange={() => handleIndustryCheckboxChange(industry)}
                 />

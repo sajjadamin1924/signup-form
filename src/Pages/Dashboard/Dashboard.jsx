@@ -1,12 +1,11 @@
-
-
 import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
 import Sidebar from "../../Components/Sidebar";
 import Cardcontainer from "../../Components/Cardcontainer";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { FaRegFileAlt } from "react-icons/fa";
-
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const [inputString, setInputString] = useState("");
@@ -61,7 +60,7 @@ const Dashboard = () => {
         level: "Entry Level",
         industry: "Dexta Launch Industry 1",
       },
-  
+
       {
         title: "Agile ways of working L1",
         button1: "Senior",
@@ -195,6 +194,10 @@ const Dashboard = () => {
                 type="text"
                 placeholder="Search module here..."
                 onChange={handleOnChange}
+              />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl text-gray-500"
               />
             </div>
             <div>

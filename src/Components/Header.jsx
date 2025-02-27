@@ -2,9 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons/faQuestion";
 
-import { faSquareCaretDown } from "@fortawesome/free-solid-svg-icons/faSquareCaretDown";
-
 import { FaMicrosoft, FaRegCircleCheck, FaRegUser } from "react-icons/fa6";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   return (
@@ -42,7 +41,7 @@ const Header = () => {
           <p className="text-center px-4">sa</p>
         </div>
         <h4 className="px-2">Hello Nabeel</h4>
-        <FontAwesomeIcon className="ml-1" icon={faSquareCaretDown} />
+        <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
       </div>
     </header>
   );
