@@ -6,13 +6,13 @@ import { FaRegCircleCheck } from "react-icons/fa6";
 import { FaRegFileAlt } from "react-icons/fa";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const [inputString, setInputString] = useState("");
   const [industrySearch, setIndustrySearch] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("All Level");
   const [checkedIndustries, setCheckedIndustries] = useState([]);
-
 
   const handleOnChange = (event) => {
     setInputString(event.target.value);
@@ -61,7 +61,6 @@ const Dashboard = () => {
         level: "Entry Level",
         industry: "Dexta Launch Industry 1",
       },
-  
       {
         title: "Agile ways of working L1",
         button1: "Senior",
@@ -160,16 +159,17 @@ const Dashboard = () => {
       },
     ];
 
-  useEffect(() => {
     setData(cardsData);
+  }, []);
 
+  useEffect(() => {
     if (inputString !== "") {
-      let filtered = cardsData.filter((card) => {
+      let filtered = data.filter((card) => {
         return card?.title.includes(inputString);
       });
       setData(filtered);
     }
-  }, [inputString]);
+  }, [inputString, data]);
 
   const filteredCards = data.filter((card) => {
     const levelMatches =
