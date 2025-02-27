@@ -1,18 +1,18 @@
-
-
 import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
 import Sidebar from "../../Components/Sidebar";
 import Cardcontainer from "../../Components/Cardcontainer";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { FaRegFileAlt } from "react-icons/fa";
-
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const [inputString, setInputString] = useState("");
   const [industrySearch, setIndustrySearch] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("All Level");
   const [checkedIndustries, setCheckedIndustries] = useState([]);
+
 
   const handleOnChange = (event) => {
     setInputString(event.target.value);
@@ -34,129 +34,131 @@ const Dashboard = () => {
     "Investment Banking",
     "Banking",
   ];
-  const cardsData = [
-    {
-      title: "5 baj gaye hain",
-      button1: "Entry",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Entry Level",
-      industry: "Accountancy",
-    },
-    {
-      title: "Accountancy level 1",
-      button1: "Entry",
-      time: "30 mins",
-      button2: "Sample Question",
-      level: "Entry Level",
-      industry: "Corporate Finance",
-    },
-    {
-      title: "Accounting level 1",
-      button1: "Entry",
-      time: "45 mins",
-      button2: "Sample Question",
-      level: "Entry Level",
-      industry: "Dexta Launch Industry 1",
-    },
 
-    {
-      title: "Agile ways of working L1",
-      button1: "Senior",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Senior Level",
-      industry: "Dexta Launch Industry 1",
-    },
-    {
-      title: "Basic to beginner changewww",
-      button1: "Senior",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Senior Level",
-      industry: "Farzan Code",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Senior",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Senior Level",
-      industry: "Farzan Meta",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Senior",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Senior Level",
-      industry: "Hedge Funds",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Investment Banking",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Banking",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Hedge Funds",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Accountancy",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Farzan Meta",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Accountancy",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Accountancy",
-    },
-    {
-      title: "cropped images checking",
-      button1: "Mid",
-      time: "12 mins",
-      button2: "Sample Question",
-      level: "Mid Level",
-      industry: "Accountancy",
-    },
-  ];
+  useEffect(() => {
+    const cardsData = [
+      {
+        title: "5 baj gaye hain",
+        button1: "Entry",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Entry Level",
+        industry: "Accountancy",
+      },
+      {
+        title: "Accountancy level 1",
+        button1: "Entry",
+        time: "30 mins",
+        button2: "Sample Question",
+        level: "Entry Level",
+        industry: "Corporate Finance",
+      },
+      {
+        title: "Accounting level 1",
+        button1: "Entry",
+        time: "45 mins",
+        button2: "Sample Question",
+        level: "Entry Level",
+        industry: "Dexta Launch Industry 1",
+      },
+  
+      {
+        title: "Agile ways of working L1",
+        button1: "Senior",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Senior Level",
+        industry: "Dexta Launch Industry 1",
+      },
+      {
+        title: "Basic to beginner changewww",
+        button1: "Senior",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Senior Level",
+        industry: "Farzan Code",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Senior",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Senior Level",
+        industry: "Farzan Meta",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Senior",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Senior Level",
+        industry: "Hedge Funds",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Investment Banking",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Banking",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Hedge Funds",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Accountancy",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Farzan Meta",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Accountancy",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Accountancy",
+      },
+      {
+        title: "cropped images checking",
+        button1: "Mid",
+        time: "12 mins",
+        button2: "Sample Question",
+        level: "Mid Level",
+        industry: "Accountancy",
+      },
+    ];
 
   useEffect(() => {
     setData(cardsData);
@@ -194,6 +196,10 @@ const Dashboard = () => {
                 type="text"
                 placeholder="Search module here..."
                 onChange={handleOnChange}
+              />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl text-gray-500"
               />
             </div>
             <div>

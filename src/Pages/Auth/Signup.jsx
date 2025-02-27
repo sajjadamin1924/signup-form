@@ -96,7 +96,7 @@ const Signup = () => {
     if (!validateForm()) {
       setModalVisible(false);
     } else {
-      navigate('dashboard')
+      navigate("dashboard");
     }
   };
   return (
@@ -195,8 +195,6 @@ const Signup = () => {
               type="submit"
               className="w-full flex items-center justify-center bg-[#73885d] text-white font-bold py-2 px-4 rounded-3xl mt-18 cursor-pointer hover:bg-[#738854]/90"
               onClick={() => setModalVisible(true)}
-
-
             >
               Sign Up
             </button>
