@@ -89,7 +89,7 @@ const Sidebar = ({
       <div className="relative px-4">
         <input
           name="Search"
-          className="bg-white p-2 pr-10 border-2 border-black rounded-md text-xl w-full"
+          className="bg-white p-2 pr-10 border-2 border-black rounded-md text-md w-full"
           type="text"
           placeholder="Search industry here..."
           value={industrySearch}
@@ -97,11 +97,11 @@ const Sidebar = ({
         />
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 text-2xl text-gray-500"
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 text-md text-gray-500"
         />
       </div>
 
-      <div className="px-6 overflow-y-auto max-h-80 relative">
+      <div className="px-6 overflow-y-auto max-h-80 scrollbar relative">
         <ul className="text-lg p-2">
           {filteredIndustries.length > 0 ? (
             filteredIndustries.map((industry, index) => (
@@ -109,7 +109,7 @@ const Sidebar = ({
                 <input
                   name="checkbox"
                   type="checkbox"
-                  className="accent-[#252E3A] text-[#C0FF06] w-4 h-4 mr-2 rounded-sm"
+                  className="accent-[#252E3A] w-4 h-4 mr-2 rounded-sm"
                   checked={checkedIndustries.includes(industry)}
                   onChange={() => handleIndustryCheckboxChange(industry)}
                 />

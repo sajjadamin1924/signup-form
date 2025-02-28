@@ -7,13 +7,12 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   return (
-    <container>
-      {" "}
-      <header className="flex px-4 justify-between items-center p-2">
-        <div className="flex px-4">
+    <header>
+      <nav className="flex px-40 justify-between items-center p-2">
+        <div className="flex ">
           <img src="dashboard.jpg" alt="logo" />
           <h1 className="text-5xl font-extrabold relative">Dexta</h1>
-          <p className="absolute top-9 left-24 pt-4">data-led-hiring</p>
+          <p className="absolute top-9 left-60 pt-4">data-led-hiring</p>
         </div>
         <div className="flex">
           <nav>
@@ -39,14 +38,14 @@ const Header = () => {
             className="rounded-full border-2 border-gray-500 p-2 w-4 h-4 mr-6"
             icon={faQuestion}
           />
-          <div className="rounded-full border-2 border-gray-500 p-2 w-12 h-12 flex items-center justify-center ml-2">
+          <div className="rounded-full border-2 border-gray-500 p-2 w-10 h-10 flex items-center justify-center ml-2">
             <p className="text-center px-4">sa</p>
           </div>
           <h4 className="px-2">Hello Nabeel</h4>
           <FontAwesomeIcon className="ml-1" icon={faAngleDown} />
         </div>
-      </header>
-    </container>
+      </nav>
+    </header>
   );
 };
 

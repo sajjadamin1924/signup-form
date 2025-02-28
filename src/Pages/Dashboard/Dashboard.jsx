@@ -183,27 +183,27 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <div>
-        <div className="px-4 flex bg-[#F6F7F7] mt-6 justify-between pt-6 pb-8 items-center">
-          <h1 className="flex text-2xl font-bold px-4 items-center">
+      <div className="bg-gray-900">
+        <div className=" px-40 flex bg-[#F6F7F7] mt-6 justify-between pt-6 pb-8 items-center">
+          <h1 className="flex text-2xl font-bold  items-center">
             <FaRegCircleCheck className="mr-2 text-2xl" />
             Modules
           </h1>
           <div className="flex px-4">
             <div className="relative">
               <input
-                className="bg-white p-2 px-4 border-2 border-black rounded-md text-xl"
+                className="bg-white p-2 px-4 border-2 border-black rounded-md text-md"
                 type="text"
                 placeholder="Search module here..."
                 onChange={handleOnChange}
               />
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl text-gray-500"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2  text-gray-500"
               />
             </div>
             <div>
-              <button className="flex items-center p-2 px-4 bg-[#C0FF06] ml-4 text-xl border-2 border-black rounded-md">
+              <button className="flex items-center p-2 px-4 bg-[#C0FF06] ml-4 text-md border-2 border-black rounded-md hover:bg-[#252E3A] hover:text-white">
                 <FaRegFileAlt className="mr-2" />
                 Create new test
               </button>
@@ -211,7 +211,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="w-full flex gap-6 p-6 bg-[#F6F7F7]">
+        <div className="w-full flex gap-6 p-6 px-40 bg-[#F6F7F7]">
           <Sidebar
             selectedLevel={selectedLevel}
             setSelectedLevel={setSelectedLevel}
