@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { CircleX } from "lucide-react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -75,7 +74,7 @@ const Signup = () => {
       isValid = false;
     } else if (!emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
-      isValid = true;
+      isValid = false;
     }
 
     if (!formData.password) {
@@ -94,11 +93,12 @@ const Signup = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      setModalVisible(false);
+      setModalVisible(false); // Don't show modal if form is invalid
     } else {
-      navigate("dashboard");
+      setModalVisible(true); // Show the modal if form is valid
     }
   };
+
   return (
     <>
       <div className="flex h-screen">
@@ -194,10 +194,11 @@ const Signup = () => {
             <button
               type="submit"
               className="w-full flex items-center justify-center bg-[#73885d] text-white font-bold py-2 px-4 rounded-3xl mt-18 cursor-pointer hover:bg-[#738854]/90"
-              onClick={() => setModalVisible(true)}
             >
               Sign Up
             </button>
+
+            {/* Modal for successful sign-up */}
             {modalVisible && (
               <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[1px] hover:bg-[#000]/90">
                 <div className="bg-white p-6 rounded-xl shadow-xl relative w-1/3">
@@ -211,6 +212,14 @@ const Signup = () => {
                     Sign Up Successful
                   </h2>
                   <p>Welcome, {formData.name}!</p>
+
+                  
+                  <button
+                    onClick={() => navigate("dashboard")}
+                    className="mt-4 w-full bg-[#73885d] text-white font-bold py-2 px-4 rounded-3xl cursor-pointer hover:bg-[#738854]/90"
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             )}

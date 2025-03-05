@@ -16,7 +16,7 @@ const Mytests = () => {
     setIsDropdownVisible(!isDropdownVisible);
   };
   const handleCreateNewTest = () => {
-    navigate('/createnewtest'); 
+    navigate('/create-new-test'); 
   };
 
   const tableData = [

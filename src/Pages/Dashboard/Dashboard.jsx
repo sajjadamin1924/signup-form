@@ -184,7 +184,7 @@ const Dashboard = () => {
 
   
   const handleCreateTestClick = () => {
-    navigate("/Createnewtest");
+    navigate("/Create-new-test");
   };
 
   return (
