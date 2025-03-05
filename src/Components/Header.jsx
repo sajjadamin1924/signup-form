@@ -1,39 +1,60 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons/faQuestion";
-
 import { FaMicrosoft, FaRegCircleCheck, FaRegUser } from "react-icons/fa6";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom"; 
 
 const Header = () => {
   return (
     <header>
-      <nav className="flex px-40 justify-between items-center p-2">
-        <div className="flex ">
-          <img src="dashboard.jpg" alt="logo" />
-          <h1 className="text-5xl font-extrabold relative">Dexta</h1>
-          <p className="absolute top-9 left-60 pt-4">data-led-hiring</p>
+      <nav className="flex justify-between items-center px-4">
+        <div className="flex items-center">
+          <img src="logo.png" className="w-48 h-12 text-2xl" alt="logo" />
+          
         </div>
+
         <div className="flex">
           <nav>
-            <ul className="flex justify-between w-full space-x-4">
-              <li className=" flex p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A] hover:text-[#C0FF06] items-center">
-                <FaMicrosoft className="mr-2" />
-                My Tests
+            <ul className="flex justify-between w-full space-x-4 items-center">
+              <li className="flex items-center p-2  font-semibold rounded-xl">
+                <NavLink
+                  to="/mytests"
+                  className={({ isActive }) =>
+                    `flex items-center p-2 rounded-xl ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
+                  }
+                >
+                  <FaMicrosoft className="mr-2" />
+                  My Tests
+                </NavLink>
               </li>
-              <li className=" flex p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A]  hover:text-[#C0FF06] items-center">
-                <FaRegUser className="mr-2" />
-                My Candidates
+              <li className="flex items-center p-2  font-semibold rounded-xl">
+                <NavLink
+                  to="/mycandidates"
+                  className={({ isActive }) =>
+                    `flex items-center p-2  rounded-xl ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
+                  }
+                >
+                  <FaRegUser className="mr-2" />
+                  My Candidates
+                </NavLink>
               </li>
-              <li className=" flex p-2 text-xl font-semibold rounded-xl  hover:bg-[#252E3A]  hover:text-[#C0FF06] items-center">
-                <FaRegCircleCheck className="mr-2" />
-                Modules
+              <li className="flex items-center p-2  font-semibold rounded-xl">
+                <NavLink
+                  to="/modules"
+                  className={({ isActive }) =>
+                    `flex items-center p-2  rounded-xl ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
+                  }
+                >
+                  <FaRegCircleCheck className="mr-2" />
+                  Modules
+                </NavLink>
               </li>
             </ul>
           </nav>
         </div>
 
-        <div className=" flex justify-center items-center px-4 ">
+        <div className="flex justify-center items-center px-4">
           <FontAwesomeIcon
             className="rounded-full border-2 border-gray-500 p-2 w-4 h-4 mr-6"
             icon={faQuestion}
@@ -50,3 +71,4 @@ const Header = () => {
 };
 
 export default Header;
+ 

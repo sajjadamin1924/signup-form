@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header";
 import Sidebar from "../../Components/Sidebar";
 import Cardcontainer from "../../Components/Cardcontainer";
@@ -8,6 +9,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [inputString, setInputString] = useState("");
   const [industrySearch, setIndustrySearch] = useState("");
@@ -180,11 +182,16 @@ const Dashboard = () => {
     return levelMatches && industryMatches;
   });
 
+  
+  const handleCreateTestClick = () => {
+    navigate("/Createnewtest");
+  };
+
   return (
     <>
       <Header />
       <div className="bg-gray-900">
-        <div className=" px-40 flex bg-[#F6F7F7] mt-6 justify-between pt-6 pb-8 items-center">
+        <div className="px-4 flex bg-[#F6F7F7] mt-6 justify-between pt-6 pb-8 items-center">
           <h1 className="flex text-2xl font-bold  items-center">
             <FaRegCircleCheck className="mr-2 text-2xl" />
             Modules
@@ -203,7 +210,10 @@ const Dashboard = () => {
               />
             </div>
             <div>
-              <button className="flex items-center p-2 px-4 bg-[#C0FF06] ml-4 text-md border-2 border-black rounded-md hover:bg-[#252E3A] hover:text-white">
+              <button
+                className="flex items-center p-2 px-4 bg-[#C0FF06] ml-4 text-md border-2 border-black rounded-md hover:bg-[#252E3A] hover:text-white"
+                onClick={handleCreateTestClick}
+              >
                 <FaRegFileAlt className="mr-2" />
                 Create new test
               </button>
@@ -211,7 +221,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="w-full flex gap-6 p-6 px-40 bg-[#F6F7F7]">
+        <div className="w-full flex gap-6 p-6  bg-[#F6F7F7]">
           <Sidebar
             selectedLevel={selectedLevel}
             setSelectedLevel={setSelectedLevel}
