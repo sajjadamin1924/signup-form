@@ -95,7 +95,7 @@ const Mytests = () => {
   return (
     <>
       <Header />
-      <div className="mt-12 px-4 flex justify-between bg-[#F6F7F7] items-center">
+      <div className="mt-8 px-4 flex justify-between bg-[#F6F7F7] items-center">
         <div className="flex items-center justify-center">
           <FaMicrosoft className="mr-2" />My Tests
         </div>

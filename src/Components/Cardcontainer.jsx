@@ -6,7 +6,7 @@ const Cardcontainer = ({ filteredCards }) => {
     <div className="w-3/4 bg-white p-4 rounded-xl">
       <div>
         <p className="px-4 text-xl font-bold">
-          28 Modules available in English
+          {filteredCards.length} Modules available in English
         </p>
       </div>
       <div className="w-full max-h-[800px] overflow-y-auto no-scrollbar mt-6">

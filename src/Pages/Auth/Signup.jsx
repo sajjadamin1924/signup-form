@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Eye, EyeOff } from "lucide-react";
-import { CircleX } from "lucide-react";
+import { Eye, EyeOff, CircleX } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import localforage from "localforage";
+
 const Signup = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -12,54 +11,37 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [errors, setErrors] = useState({ name: "", email: "", password: "" });
+
   useEffect(() => {
-    localforage.getItem("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIyLCJ0eXBlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzQwNzQzNTk5LCJleHAiOjE3NDA4MDM1OTksImF1ZCI6Imh0dHBzOi8vZGV2LmRleHRhLmlvIiwiaXNzIjoiMjdjYWY1MmMtZjFhMy00YTlkLTg5NDItYmIxMzM2MDM5OWY0Iiwic3ViIjoiYmthcmFtYXQrZGV2ZW50ZXJhZnRlckBjb2RlLWZyZWFrcy5jb20ifQ.m6eZyjs0tEAMgZ1SoR2AUJX6OGRgChfj9CTLmfyQwfyyi-hm_DW2QXhtsaaHxrCuXz-QyNGU6ia2oSPg_rriEkRj5snJ_2d53yIvNePHaKpJCVUX9_fiVwiQdXX9rNRhcf1XK9rWfI-KR-GtigkPUdyymB8HWoBwILx9vKjrKaWJCd5mYVAGM7BqkX4iHEGeGCUBytLVi4N3SdLma5x9qR1xPZ2UUObsdkUQWH7df1Pl8BaQs1DjTGDVV2_Ian5kTvyDM63s6AeOvPGtgqW7-kwi1CmynygtwMQcxU0gZv1QPOjthXZE-kKoNhOwqdcamb3MVC6tH01OwG0FGvuuGw").then((user) => {
-      if (user) {
-        navigate("/dashboard");
-      }
-    });
+    const user = localStorage.getItem("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIyLCJ0eXBlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzQwNzQzNTk5LCJleHAiOjE3NDA4MDM1OTksImF1ZCI6Imh0dHBzOi8vZGV2LmRleHRhLmlvIiwiaXNzIjoiMjdjYWY1MmMtZjFhMy00YTlkLTg5NDItYmIxMzM2MDM5OWY0Iiwic3ViIjoiYmthcmFtYXQrZGV2ZW50ZXJhZnRlckBjb2RlLWZyZWFrcy5jb20ifQ.m6eZyjs0tEAMgZ1SoR2AUJX6OGRgChfj9CTLmfyQwfyyi-hm_DW2QXhtsaaHxrCuXz-QyNGU6ia2oSPg_rriEkRj5snJ_2d53yIvNePHaKpJCVUX9_fiVwiQdXX9rNRhcf1XK9rWfI-KR-GtigkPUdyymB8HWoBwILx9vKjrKaWJCd5mYVAGM7BqkX4iHEGeGCUBytLVi4N3SdLma5x9qR1xPZ2UUObsdkUQWH7df1Pl8BaQs1DjTGDVV2_Ian5kTvyDM63s6AeOvPGtgqW7-kwi1CmynygtwMQcxU0gZv1QPOjthXZE-kKoNhOwqdcamb3MVC6tH01OwG0FGvuuGw");
+    if (user) {
+      navigate("/dashboard");
+    }
   }, [navigate]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
+    setFormData({ ...formData, [name]: value });
     let newErrors = { ...errors };
-    if (name === "name") {
-      if (value === "") {
-        newErrors.name = "Full Name is required";
-      } else {
-        newErrors.name = "";
-      }
-    }
 
+    if (name === "name") {
+      newErrors.name = value ? "" : "Full Name is required";
+    }
     if (name === "email") {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      if (value === "") {
-        newErrors.email = "Email is required";
-      } else if (!emailRegex.test(value)) {
-        newErrors.email = "Please enter a valid email";
-      } else {
-        newErrors.email = "";
-      }
+      newErrors.email = value
+        ? emailRegex.test(value)
+          ? ""
+          : "Please enter a valid email"
+        : "Email is required";
     }
-
     if (name === "password") {
-      if (value === "") {
-        newErrors.password = "Password is required";
-      } else if (value.length < 6) {
-        newErrors.password = "Password must be at least 6 characters";
-      } else {
-        newErrors.password = "";
-      }
+      newErrors.password = value
+        ? value.length >= 6
+          ? ""
+          : "Password must be at least 6 characters"
+        : "Password is required";
     }
 
     setErrors(newErrors);
@@ -73,16 +55,15 @@ const Signup = () => {
       newErrors.name = "Full Name is required";
       isValid = false;
     }
-
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!formData.email) {
       newErrors.email = "Email is required";
       isValid = false;
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
+      newErrors.email = "Please enter a valid email";
       isValid = false;
     }
-
     if (!formData.password) {
       newErrors.password = "Password is required";
       isValid = false;
@@ -97,14 +78,14 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!validateForm()) {
-      setModalVisible(false); // Don't show modal if form is invalid
+      setModalVisible(false);
     } else {
-      localforage.setItem("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIyLCJ0eXBlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzQwNzQzNTk5LCJleHAiOjE3NDA4MDM1OTksImF1ZCI6Imh0dHBzOi8vZGV2LmRleHRhLmlvIiwiaXNzIjoiMjdjYWY1MmMtZjFhMy00YTlkLTg5NDItYmIxMzM2MDM5OWY0Iiwic3ViIjoiYmthcmFtYXQrZGV2ZW50ZXJhZnRlckBjb2RlLWZyZWFrcy5jb20ifQ.m6eZyjs0tEAMgZ1SoR2AUJX6OGRgChfj9CTLmfyQwfyyi-hm_DW2QXhtsaaHxrCuXz-QyNGU6ia2oSPg_rriEkRj5snJ_2d53yIvNePHaKpJCVUX9_fiVwiQdXX9rNRhcf1XK9rWfI-KR-GtigkPUdyymB8HWoBwILx9vKjrKaWJCd5mYVAGM7BqkX4iHEGeGCUBytLVi4N3SdLma5x9qR1xPZ2UUObsdkUQWH7df1Pl8BaQs1DjTGDVV2_Ian5kTvyDM63s6AeOvPGtgqW7-kwi1CmynygtwMQcxU0gZv1QPOjthXZE-kKoNhOwqdcamb3MVC6tH01OwG0FGvuuGw", formData).then(() => {
-        setModalVisible(true);
-      });
-      // setModalVisible(true); // Show the modal if form is valid
+      localStorage.setItem(
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIyLCJ0eXBlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzQwNzQzNTk5LCJleHAiOjE3NDA4MDM1OTksImF1ZCI6Imh0dHBzOi8vZGV2LmRleHRhLmlvIiwiaXNzIjoiMjdjYWY1MmMtZjFhMy00YTlkLTg5NDItYmIxMzM2MDM5OWY0Iiwic3ViIjoiYmthcmFtYXQrZGV2ZW50ZXJhZnRlckBjb2RlLWZyZWFrcy5jb20ifQ.m6eZyjs0tEAMgZ1SoR2AUJX6OGRgChfj9CTLmfyQwfyyi-hm_DW2QXhtsaaHxrCuXz-QyNGU6ia2oSPg_rriEkRj5snJ_2d53yIvNePHaKpJCVUX9_fiVwiQdXX9rNRhcf1XK9rWfI-KR-GtigkPUdyymB8HWoBwILx9vKjrKaWJCd5mYVAGM7BqkX4iHEGeGCUBytLVi4N3SdLma5x9qR1xPZ2UUObsdkUQWH7df1Pl8BaQs1DjTGDVV2_Ian5kTvyDM63s6AeOvPGtgqW7-kwi1CmynygtwMQcxU0gZv1QPOjthXZE-kKoNhOwqdcamb3MVC6tH01OwG0FGvuuGw",
+        JSON.stringify({ name: formData.name, email: formData.email })
+      );
+      setModalVisible(true);
     }
   };
 
@@ -207,7 +188,7 @@ const Signup = () => {
               Sign Up
             </button>
 
-            {/* Modal for successful sign-up */}
+            
             {modalVisible && (
               <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[1px] hover:bg-[#000]/90">
                 <div className="bg-white p-6 rounded-xl shadow-xl relative w-1/3">

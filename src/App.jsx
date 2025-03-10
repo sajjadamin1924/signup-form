@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mytests from "./Pages/Mytests";
 import Createnewtest from "./Pages/Createnewtest";
+import Mycandidates from "./Pages/Mycandidates";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/my-tests" element={<Mytests />} />
         <Route path="/modules" element={<Dashboard />} />
         <Route path="/create-new-test" element={<Createnewtest />} />
+        <Route path="/my-candidates" element={<Mycandidates />} />
       </Routes>
     </BrowserRouter>
   );
