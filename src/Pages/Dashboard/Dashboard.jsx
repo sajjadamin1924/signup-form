@@ -17,25 +17,33 @@ const Dashboard = () => {
   const [checkedIndustries, setCheckedIndustries] = useState([]);
   const [filteredDepartments, setFilteredDepartments] = useState([]);
   const [filteredRoles, setFilteredRoles] = useState([]);
+  const [checkedDepartments, setCheckedDepartments] = useState([]);
+  const [checkedRoles, setCheckedRoles] = useState([]);
+  const [departmentSearch, setDepartmentSearch] = useState("");
+  const [roleSearch, setRoleSearch] = useState("");
 
   const handleOnChange = (event) => {
     setInputString(event.target.value);
   };
 
   const resetFilters = () => {
-    setCheckedIndustries([]);
-    setCheckedDepartments([]);
-    setCheckedRoles([]);
-    setFilteredDepartments([]);
-    setFilteredRoles([]);
-    setIndustrySearch("");
-    setDepartmentSearch("");
-    setRoleSearch("");
+  setCheckedIndustries([]);
+  setCheckedDepartments([]); 
+  setCheckedRoles([]); 
+  setIndustrySearch("");
+  setDepartmentSearch("");
+  setRoleSearch("");
+
+  setFilteredDepartments([]); 
+  setFilteredRoles([]); 
+
+  localStorage.removeItem("checkedIndustries");
+  localStorage.removeItem("checkedDepartments");
+  localStorage.removeItem("checkedRoles");
   
-   
-  };
-  
-  
+};
+
+
   const industries = [
     "Accountancy",
     "Banking",
@@ -277,9 +285,9 @@ const Dashboard = () => {
     <>
       <Header />
       <div>
-        <div className="px-4 flex bg-[#F6F7F7] mt-6 justify-between pt-6 pb-8 items-center">
-          <h1 className="flex text-2xl font-bold  items-center">
-            <FaRegCircleCheck className="mr-2 text-2xl" />
+        <div className="px-6 flex bg-[#F6F7F7]  justify-between pt-6 pb-8 items-center ">
+          <h1 className="flex text-xl font-bold  items-center">
+            <FaRegCircleCheck className="mr-2 " />
             Modules
           </h1>
           <div className="flex px-4">
@@ -326,6 +334,7 @@ const Dashboard = () => {
           />
 
           <Cardcontainer filteredCards={filteredCards} />
+
         </div>
       </div>
     </>

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleUp,
-  faAngleDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = ({
   selectedLevel,
@@ -16,7 +13,7 @@ const Sidebar = ({
   resetFilters,
   departments,
   roles,
-  setFilteredDepartments, 
+  setFilteredDepartments,
   setFilteredRoles,
 }) => {
   const [isLevelCollapsed, setIsLevelCollapsed] = useState(false);
@@ -29,37 +26,22 @@ const Sidebar = ({
   const [departmentSearch, setDepartmentSearch] = useState("");
   const [roleSearch, setRoleSearch] = useState("");
 
+  // Load stored filters on mount
   useEffect(() => {
     const savedLevel = localStorage.getItem("selectedLevel");
-    if (savedLevel) {
-      setSelectedLevel(savedLevel);
-    }
+    if (savedLevel) setSelectedLevel(savedLevel);
 
     const savedCheckedIndustries = localStorage.getItem("checkedIndustries");
-    if (savedCheckedIndustries) {
-      setCheckedIndustries(JSON.parse(savedCheckedIndustries));
-    }
-  }, [setSelectedLevel, setCheckedIndustries]);
+    if (savedCheckedIndustries) setCheckedIndustries(JSON.parse(savedCheckedIndustries));
 
-  const handleLevelSelection = (level) => {
-    setSelectedLevel(level);
-    localStorage.setItem("selectedLevel", level);
-  };
-  const handleDepartmentChange = (event) => {
-    const { value, checked } = event.target;
-    setFilteredDepartments((prev) =>
-      checked ? [...prev, value] : prev.filter((dep) => dep !== value)
-    );
-  };
-  
-  const handleRoleChange = (event) => {
-    const { value, checked } = event.target;
-    setFilteredRoles((prev) =>
-      checked ? [...prev, value] : prev.filter((role) => role !== value)
-    );
-  };
-  
+    const savedCheckedDepartments = localStorage.getItem("checkedDepartments");
+    if (savedCheckedDepartments) setCheckedDepartments(JSON.parse(savedCheckedDepartments));
 
+    const savedCheckedRoles = localStorage.getItem("checkedRoles");
+    if (savedCheckedRoles) setCheckedRoles(JSON.parse(savedCheckedRoles));
+  }, [setSelectedLevel, setCheckedIndustries, setCheckedDepartments, setCheckedRoles]);
+
+  // Save selection in localStorage
   const handleCheckboxChange = (item, setChecked, checkedKey) => {
     setChecked((prevChecked) => {
       let updatedChecked;
@@ -73,35 +55,31 @@ const Sidebar = ({
     });
   };
 
-  const filteredIndustries = industries.filter((industry) =>
-    industry.toLowerCase().includes(industrySearch.toLowerCase())
-  );
+  // Reset all filters
+  const handleResetFilters = () => {
+    setCheckedIndustries([]);
+    setCheckedDepartments([]);
+    setCheckedRoles([]);
+    localStorage.removeItem("checkedIndustries");
+    localStorage.removeItem("checkedDepartments");
+    localStorage.removeItem("checkedRoles");
+    localStorage.removeItem("selectedLevel");
 
-  const filteredDepartments = departments.filter((department) =>
-    department.toLowerCase().includes(departmentSearch.toLowerCase())
-  );
-
-  const filteredRoles = roles.filter((role) =>
-    role.toLowerCase().includes(roleSearch.toLowerCase())
-  );
+    resetFilters();
+  };
 
   useEffect(() => {
-    if (setFilteredDepartments) {
-      setFilteredDepartments(checkedDepartments);
-    }
+    setFilteredDepartments(checkedDepartments);
   }, [checkedDepartments, setFilteredDepartments]);
+
   useEffect(() => {
-    if (setFilteredRoles) {
-      setFilteredRoles(checkedRoles);
-    }
+    setFilteredRoles(checkedRoles);
   }, [checkedRoles, setFilteredRoles]);
-  
 
   return (
-    <div className="w-1/4 bg-white p-6 rounded-xl max-h-[600px] overflow-y-auto no-scrollbar">
-      
+    <div className="w-1/4 bg-white p-4 rounded-xl max-h-96  overflow-y-auto no-scrollbar ">
       {/* Experience Level Section */}
-      <div className="flex justify-between items-center px-4">
+      <div className="flex justify-between items-center px-2">
         <h1 className="text-md mb-6 font-bold">Experience Level</h1>
         <FontAwesomeIcon
           className="text-xl text-gray-400 mb-6 cursor-pointer"
@@ -111,22 +89,23 @@ const Sidebar = ({
       </div>
 
       {!isLevelCollapsed && (
-        <div className="grid grid-flow-col grid-rows-2 gap-4 mt-4">
-          {["Entry Level", "Mid Level", "Senior Level", "All Level"].map(
-            (level) => (
-              <button
-                key={level}
-                onClick={() => handleLevelSelection(level)}
-                className={`${
-                  selectedLevel === level
-                    ? "bg-black text-white hover:bg-blue-600 cursor-pointer"
-                    : "bg-[#F6F7F7] text-black cursor-pointer"
-                } p-4 rounded-xl text-sm mb-4`}
-              >
-                {level}
-              </button>
-            )
-          )}
+        <div className="grid grid-flow-col grid-rows-2 gap-2 mt-4">
+          {["Entry Level", "Mid Level", "Senior Level", "All Level"].map((level) => (
+            <button
+              key={level}
+              onClick={() => {
+                setSelectedLevel(level);
+                localStorage.setItem("selectedLevel", level);
+              }}
+              className={`${
+                selectedLevel === level
+                  ? "bg-black text-white hover:bg-blue-600 cursor-pointer"
+                  : "bg-[#F6F7F7] text-black cursor-pointer"
+              } px-6 py-4 rounded-sm text-sm font-medium mb-4`}
+            >
+              {level}
+            </button>
+          ))}
         </div>
       )}
 
@@ -156,24 +135,26 @@ const Sidebar = ({
 
           <div className="px-6 overflow-y-auto max-h-80 scrollbar relative">
             <ul className="text-sm font-medium p-2">
-              {filteredIndustries.map((industry, index) => (
-                <li className="p-2" key={index}>
-                  <input
-                    type="checkbox"
-                    checked={checkedIndustries.includes(industry)}
-                    onChange={() =>
-                      handleCheckboxChange(industry, setCheckedIndustries, "checkedIndustries")
-                    }
-                    className="accent-[#252E3A] w-4 h-4 mr-2 rounded-sm"
-                  />
-                  {industry}
-                </li>
-              ))}
+              {industries
+                .filter((industry) => industry.toLowerCase().includes(industrySearch.toLowerCase()))
+                .map((industry, index) => (
+                  <li className="p-2" key={index}>
+                    <input
+                      type="checkbox"
+                      checked={checkedIndustries.includes(industry)}
+                      onChange={() => handleCheckboxChange(industry, setCheckedIndustries, "checkedIndustries")}
+                      className="accent-[#252E3A] w-4 h-4 mr-2 rounded-sm"
+                    />
+                    {industry}
+                  </li>
+                ))}
             </ul>
           </div>
         </>
       )}
-       <div className="flex justify-between items-center px-4 mt-4">
+
+      
+      <div className="flex justify-between items-center px-4 mt-4">
         <h1 className="text-md mb-6 font-bold">Departments</h1>
         <FontAwesomeIcon
           className="text-xl text-gray-400 mb-6 cursor-pointer"
@@ -196,27 +177,28 @@ const Sidebar = ({
 
           <div className="px-6 overflow-y-auto max-h-80 scrollbar relative">
             <ul className="text-sm font-medium p-2">
-              {filteredDepartments.map((department, index) => (
-                <li className="p-2" key={index}>
-                  <input
-                    type="checkbox"
-                    checked={checkedDepartments.includes(department)}
-                    onChange={() =>
-                      handleCheckboxChange(department, setCheckedDepartments, "checkedDepartments")
-                    }
-                    className="accent-[#252E3A] w-4 h-4 mr-2 rounded-sm"
-                  />
-                  {department}
-                </li>
-              ))}
+              {departments
+                .filter((department) => department.toLowerCase().includes(departmentSearch.toLowerCase()))
+                .map((department, index) => (
+                  <li className="p-2" key={index}>
+                    <input
+                      type="checkbox"
+                      checked={checkedDepartments.includes(department)}
+                      onChange={() => handleCheckboxChange(department, setCheckedDepartments, "checkedDepartments")}
+                      className="accent-[#252E3A] w-4 h-4 mr-2 rounded-sm"
+                    />
+                    {department}
+                  </li>
+                ))}
             </ul>
           </div>
         </>
       )}
+      
 
-      {/* Roles Section (Fixed) */}
+
       <div className="flex justify-between items-center px-4 mt-4">
-        <h1 className="text-md mb-6 font-bold">Roles</h1>
+        <h1 className="text-md mb-6 font-bold">Job Role</h1>
         <FontAwesomeIcon
           className="text-xl text-gray-400 mb-6 cursor-pointer"
           icon={isRoleCollapsed ? faAngleDown : faAngleUp}
@@ -229,7 +211,7 @@ const Sidebar = ({
           <div className="relative px-4">
             <input
               type="text"
-              placeholder="Search roles..."
+              placeholder="Search Job Role..."
               value={roleSearch}
               onChange={(e) => setRoleSearch(e.target.value)}
               className="bg-white p-2 pr-10 border-2 border-black rounded-md text-md w-full"
@@ -238,28 +220,28 @@ const Sidebar = ({
 
           <div className="px-6 overflow-y-auto max-h-80 scrollbar relative">
             <ul className="text-sm font-medium p-2">
-              {filteredRoles.map((role, index) => (
-                <li className="p-2" key={index}>
-                  <input
-                    type="checkbox"
-                    checked={checkedRoles.includes(role)}
-                    onChange={() => handleCheckboxChange(role, setCheckedRoles, "checkedRoles")}
-                    className="accent-[#252E3A] w-4 h-4 mr-2 rounded-sm"
-                  />
-                  {role}
-                </li>
-              ))}
+              {roles
+                .filter((role) => role.toLowerCase().includes(roleSearch.toLowerCase()))
+                .map((role, index) => (
+                  <li className="p-2" key={index}>
+                    <input
+                      type="checkbox"
+                      checked={checkedRoles.includes(role)}
+                      onChange={() => handleCheckboxChange(role, setCheckedRoles, "checkedRoles")}
+                      className="accent-[#252E3A] w-4 h-4 mr-2 rounded-sm"
+                    />
+                    {role}
+                  </li>
+                ))}
             </ul>
           </div>
         </>
       )}
+      
 
       
       {(checkedIndustries.length > 0 || checkedDepartments.length > 0 || checkedRoles.length > 0) && (
-        <button 
-          onClick={resetFilters} 
-          className="mt-4 px-4 py-2 bg-[#C0FF06] w-full text-gray-500 font-bold rounded-md hover:bg-[#252E3A] hover:text-white"
-        >
+        <button onClick={handleResetFilters} className="mt-4 px-4 py-2 bg-[#C0FF06] w-full text-gray-500 font-bold rounded-md hover:bg-[#252E3A] hover:text-white">
           Reset Filters
         </button>
       )}

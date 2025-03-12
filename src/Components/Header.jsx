@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="flex justify-between items-center px-4">
+      <nav className="flex justify-between items-center px-6 p-2">
         <div className="flex items-center">
           <img src="logo.png" className="w-48 h-12 text-2xl" alt="logo" />
         </div>
@@ -32,11 +32,11 @@ const Header = () => {
         <div className="flex">
           <nav>
             <ul className="flex justify-between w-full space-x-4 items-center">
-              <li className="flex items-center p-2 font-bold rounded-xl">
+              <li className="flex items-center px-4 font-bold rounded-xl">
                 <NavLink
                   to="/my-tests"
                   className={({ isActive }) =>
-                    `flex items-center p-2 rounded-xl ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
+                    `flex items-center px-4 py-2 rounded-md ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
                   }
                 >
                   <FaMicrosoft className="mr-2" />
@@ -47,7 +47,7 @@ const Header = () => {
                 <NavLink
                   to="/my-candidates"
                   className={({ isActive }) =>
-                    `flex items-center p-2 rounded-xl ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
+                    `flex items-center px-4 py-2 rounded-md ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
                   }
                 >
                   <FaRegUser className="mr-2" />
@@ -58,7 +58,7 @@ const Header = () => {
                 <NavLink
                   to="/modules"
                   className={({ isActive }) =>
-                    `flex items-center p-2 rounded-xl ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
+                    `flex items-center px-4 py-2 rounded-md ${isActive ? "bg-[#252E3A] text-[#C0FF06]" : ""}`
                   }
                 >
                   <FaRegCircleCheck className="mr-2" />

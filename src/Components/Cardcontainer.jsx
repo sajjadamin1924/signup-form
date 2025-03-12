@@ -3,14 +3,14 @@ import Card from "./Card";
 
 const Cardcontainer = ({ filteredCards }) => {
   return (
-    <div className="w-3/4 bg-white p-4 rounded-xl">
+    <div className="w-3/4 bg-white p-2 rounded-xl max-h-96 overflow-auto no-scrollbar">
       <div>
-        <p className="px-4 text-xl font-bold">
+        <p className="px-2 text-xl font-bold">
           {filteredCards.length} Modules available in English
         </p>
       </div>
-      <div className="w-full max-h-[800px] overflow-y-auto no-scrollbar mt-6">
-        <div className="grid grid-flow-row grid-rows-1 grid-cols-3 gap-6 mt-2 px-4">
+      <div className="w-full  mt-6">
+        <div className="grid grid-flow-row grid-rows-1 grid-cols-3 gap-4 mt-2 px-2">
           {filteredCards.length > 0 ? (
             filteredCards.map((card, index) => (
               <Card

@@ -95,9 +95,9 @@ const Mytests = () => {
   return (
     <>
       <Header />
-      <div className="mt-8 px-4 flex justify-between bg-[#F6F7F7] items-center">
-        <div className="flex items-center justify-center">
-          <FaMicrosoft className="mr-2" />My Tests
+      <div className=" px-4 flex justify-between bg-[#F6F7F7] items-center">
+        <div className="flex items-center justify-center py-12 text-2xl font-medium">
+          <FaMicrosoft className="mr-2 text-md" />My Tests
         </div>
         <div>
           <button onClick={handleCreateNewTest} className="flex items-center justify-center p-2 bg-[#C0FF06] hover:bg-[#252E3A] hover:text-white border-1 border-black rounded-md">
