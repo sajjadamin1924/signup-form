@@ -285,7 +285,7 @@ const Dashboard = () => {
     <>
       <Header />
       <div>
-        <div className="px-6 flex bg-[#F6F7F7]  justify-between pt-6 pb-8 items-center ">
+        <div className="px-6 flex bg-[#F6F7F7]  justify-between pt-6 pb-8 items-center overflow-y-auto no-scrollbar">
           <h1 className="flex text-xl font-bold  items-center">
             <FaRegCircleCheck className="mr-2 " />
             Modules

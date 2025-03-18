@@ -77,7 +77,7 @@ const Sidebar = ({
   }, [checkedRoles, setFilteredRoles]);
 
   return (
-    <div className="w-1/4 bg-white p-4 rounded-xl max-h-96  overflow-y-auto no-scrollbar ">
+    <div className="w-1/4 bg-white p-4 rounded-xl   overflow-y-auto no-scrollbar ">
       {/* Experience Level Section */}
       <div className="flex justify-between items-center px-2">
         <h1 className="text-md mb-6 font-bold">Experience Level</h1>

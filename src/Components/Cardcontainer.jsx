@@ -3,7 +3,7 @@ import Card from "./Card";
 
 const Cardcontainer = ({ filteredCards }) => {
   return (
-    <div className="w-3/4 bg-white p-2 rounded-xl max-h-96 overflow-auto no-scrollbar">
+    <div className="w-3/4 bg-white p-2 rounded-xl  overflow-auto no-scrollbar">
       <div>
         <p className="px-2 text-xl font-bold">
           {filteredCards.length} Modules available in English

@@ -1,4 +1,5 @@
-import React, { useState,useMemo } from "react";
+import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import Header from "../Components/Header";
@@ -18,23 +19,14 @@ const roleOptions = [
   { value: "customer service operations specialist", label: "Customer Service Operations Specialist" },
 ];
 
-
-
 const workArrangementOptions = [
   { value: "remote", label: "Remote" },
   { value: "hybrid", label: "Hybrid" },
   { value: "onsite", label: "On-site" },
 ];
 
-const industryOptionsWithAll = [
-  { value: "all", label: "Select All" },
-  ...industryOptions,
-];
-const roleOptionsWithAll = [
-  { value: "all", label: "Select All" },
-  ...roleOptions,
-];
-
+const industryOptionsWithAll = [{ value: "all", label: "Select All" }, ...industryOptions];
+const roleOptionsWithAll = [{ value: "all", label: "Select All" }, ...roleOptions];
 
 const roleNameStyles = {
   control: (provided) => ({
@@ -43,9 +35,6 @@ const roleNameStyles = {
     minHeight: "56px",
     borderRadius: "6px",
     borderColor: "#D1D5DB",
-  }),
-  dropdownIndicator: () => ({
-    display: "none",
   }),
 };
 
@@ -57,15 +46,8 @@ const customStyles = {
     borderRadius: "6px",
     borderColor: state.isFocused ? "#D1D5DC" : "#D1D5DB",
   }),
-  dropdownIndicator: (provided) => ({
-    ...provided,
-    color: "#6B7280",
-  }),
-  clearIndicator: (provided) => ({
-    ...provided,
-    color: "#6B7280",
-  }),
 };
+
 const getCustomOptions = (options) =>
   options.map((option) => ({
     ...option,
@@ -78,16 +60,20 @@ const getCustomOptions = (options) =>
   }));
 
 const Createnewtest = () => {
+  const navigate = useNavigate();
+  
   const [selectedIndustry, setSelectedIndustry] = useState([]);
   const [selectedRole, setSelectedRole] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
   const [selectedWorkArrangement, setSelectedWorkArrangement] = useState(null);
+  const [roleName, setRoleName] = useState("");
+  const [selectedExperience, setSelectedExperience] = useState("");
 
   const countryOptions = useMemo(() => [
     { value: "global", label: "Global" },
     ...countryList().getData(),
   ], []);
-  
+
   const handleIndustryChange = (selected) => {
     if (selected.some((option) => option.value === "all")) {
       setSelectedIndustry(industryOptions);
@@ -103,14 +89,18 @@ const Createnewtest = () => {
       setSelectedRole(selected);
     }
   };
-  const handleLocationChange = (selected) => {
-    setSelectedLocation(selected);
+
+  const isFormComplete = roleName && selectedIndustry.length > 0 && selectedRole.length > 0 && selectedLocation.length > 0 && selectedWorkArrangement && selectedExperience;
+
+  const handleNextStep = () => {
+    if (isFormComplete) {
+      navigate("/add-modules");
+    }
   };
-  
+
   return (
     <>
       <Header />
-
       <div className="bg-[#F6F7F7] px-4 rounded-lg mb-10">
         <div className="flex items-center justify-between py-6">
           <div className="flex space-x-8 items-center">
@@ -118,25 +108,31 @@ const Createnewtest = () => {
               <FaRegFileAlt className="inline-block mr-2 text-2xl" />
               Create New Test
             </h2>
-
             <p>
               <CiCirclePlus className="inline-block mr-2" />
               Added modules (0)
             </p>
-
             <p>
               <FaRegCircleCheck className="inline-block mr-2" />0 mins
             </p>
           </div>
-          <div className="text-right ">
-            <button className="bg-[#D3D5D8] text-[#7C8289] px-12 py-2.5 rounded ">
+          <div className="text-right">
+            <button
+              className={`px-12 py-2.5 rounded ${
+                isFormComplete ? "bg-[#252E3A] text-white" : "bg-[#D3D5D8] text-[#7C8289]"
+              }`}
+              onClick={handleNextStep}
+              disabled={!isFormComplete}
+            >
               Next Step →
             </button>
           </div>
         </div>
 
         <div className="grid grid-cols-4 gap-1 items-center justify-between mt-6">
-          <div className="bg-[#D3D5D8] rounded-l-xl pl-4">Add test details</div>
+          <div className={`pl-4 ${isFormComplete ? "bg-[#252E3A] text-white" : "bg-[#D3D5D8]"}`}>
+            Add test details
+          </div>
           <div className="bg-[#D3D5D8] pl-4">Add modules</div>
           <div className="bg-[#D3D5D8] pl-4">Add custom questions</div>
           <div className="bg-[#D3D5D8] pl-4 rounded-r-xl">Add candidates</div>
@@ -145,9 +141,12 @@ const Createnewtest = () => {
         <div className="bg-white grid grid-cols-2 gap-12 mt-6 p-10 px-10">
           <div>
             <label className="block font-medium mb-2">Role Name</label>
-            <Select
+            <input
               type="text"
               placeholder="Name your role"
+              value={roleName}
+              onChange={(e) => setRoleName(e.target.value)}
+              className="w-full border border-gray-300 rounded px-4 py-3"
               styles={roleNameStyles}
             />
           </div>
@@ -206,18 +205,17 @@ const Createnewtest = () => {
           <div>
             <label className="block font-medium mb-4">Experience Level</label>
             <div className="grid grid-cols-4 gap-4">
-              <button className="border rounded p-4 h-[56px] w-full hover:bg-[#252E3A] hover:text-white">
-                Entry Level
-              </button>
-              <button className="border rounded p-4 h-[56px] w-full hover:bg-[#252E3A] hover:text-white">
-                Mid Level
-              </button>
-              <button className="border rounded p-4 h-[56px] w-full hover:bg-[#252E3A] hover:text-white">
-                Senior Level
-              </button>
-              <button className="border rounded p-4 h-[56px] w-full hover:bg-[#252E3A] hover:text-white">
-                All Levels
-              </button>
+              {["Entry Level", "Mid Level", "Senior Level", "All Levels"].map((level) => (
+                <button
+                  key={level}
+                  className={`border rounded p-4 h-[56px] w-full ${
+                    selectedExperience === level ? "bg-[#252E3A] text-white" : "hover:bg-[#252E3A] hover:text-white"
+                  }`}
+                  onClick={() => setSelectedExperience(level)}
+                >
+                  {level}
+                </button>
+              ))}
             </div>
           </div>
         </div>
