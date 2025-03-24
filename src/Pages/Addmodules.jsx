@@ -75,16 +75,20 @@ const Addmodules = () => {
 
         {/* Steps Section */}
         <div className="grid grid-cols-4 gap-1 items-center justify-between mt-6">
-          <div className="pl-4 bg-[#252E3A] text-white py-2">Add test details</div>
+          <div className="pl-4 bg-[#FF512D] text-white rounded-l-xl ">
+            Add test details
+          </div>
           <div
-            className={`pl-4 py-2 ${
+            className={`pl-4  ${
               isNextEnabled ? "bg-blue-500 text-white" : "bg-[#D3D5D8]"
             }`}
           >
             Add modules
           </div>
-          <div className="bg-[#D3D5D8] pl-4 py-2">Add custom questions</div>
-          <div className="bg-[#D3D5D8] pl-4 py-2 rounded-r-xl">Add candidates</div>
+          <div className="bg-[#D3D5D8] pl-4 ">Add custom questions</div>
+          <div className="bg-[#D3D5D8] pl-4 rounded-r-xl">
+            Add candidates
+          </div>
         </div>
 
         {/* Main Content Section */}
@@ -93,8 +97,9 @@ const Addmodules = () => {
           <div className="p-6 bg-white shadow-lg rounded-lg w-96">
             <h2 className="text-lg font-semibold">Add modules</h2>
             <p className="text-sm text-gray-600 mt-2">
-              Your test can include up to <strong>5 modules</strong>. Scroll and select
-              modules on the right. Use different types of modules for the best results.
+              Your test can include up to <strong>5 modules</strong>. Scroll and
+              select modules on the right. Use different types of modules for
+              the best results.
             </p>
 
             <h3 className="mt-4 font-semibold">You have added:</h3>
@@ -111,8 +116,18 @@ const Addmodules = () => {
           </div>
 
           {/* Right: Available Modules Section (Cards) */}
-          <div className="flex-1 p-6 bg-white shadow-lg rounded-lg ml-6">
-            <h2 className="text-lg font-semibold">Available Modules</h2>
+          <div className="flex-1 p-6 bg-white shadow-lg rounded-lg ml-6 ">
+            <div className="flex space-x-4 items-center">
+              
+              <h2 className="text-lg font-semibold">suggested Modules</h2>
+              <h2 className="text-lg font-semibold">All modules</h2>
+              <div className="p-2 ">
+              <input type="text"
+              placeholder="search test module by library here" />
+            </div>
+            </div>
+            
+
             <div className="grid grid-cols-3 gap-4 mt-4">
               {availableModules.map((module) => (
                 <div

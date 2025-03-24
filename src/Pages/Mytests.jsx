@@ -94,6 +94,7 @@ const Mytests = () => {
 
   return (
     <>
+    <div className="h-screen overflow-y-auto flex flex-col no-scrollbar">
       <Header />
       <div className=" px-4 flex justify-between bg-[#F6F7F7] items-center">
         <div className="flex items-center justify-center py-12 text-2xl font-medium">
@@ -215,6 +216,7 @@ const Mytests = () => {
             ))}
           </tbody>
         </table>
+      </div>
       </div>
     </>
   );

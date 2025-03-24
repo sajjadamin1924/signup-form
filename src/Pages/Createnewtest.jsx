@@ -104,8 +104,8 @@ const Createnewtest = () => {
       <div className="bg-[#F6F7F7] px-4 rounded-lg mb-10">
         <div className="flex items-center justify-between py-6">
           <div className="flex space-x-8 items-center">
-            <h2 className="text-2xl font-semibold mb-4">
-              <FaRegFileAlt className="inline-block mr-2 text-2xl" />
+            <h2 className="text-2xl font-semibold ">
+              <FaRegFileAlt className="inline-block mr-2 text-2xl items-center mb-1" />
               Create New Test
             </h2>
             <p>
@@ -119,7 +119,7 @@ const Createnewtest = () => {
           <div className="text-right">
             <button
               className={`px-12 py-2.5 rounded ${
-                isFormComplete ? "bg-[#252E3A] text-white" : "bg-[#D3D5D8] text-[#7C8289]"
+                isFormComplete ? "bg-[#C0FF06] text-black" : "bg-[#D3D5D8] text-[#7C8289]"
               }`}
               onClick={handleNextStep}
               disabled={!isFormComplete}
@@ -130,7 +130,7 @@ const Createnewtest = () => {
         </div>
 
         <div className="grid grid-cols-4 gap-1 items-center justify-between mt-6">
-          <div className={`pl-4 ${isFormComplete ? "bg-[#252E3A] text-white" : "bg-[#D3D5D8]"}`}>
+          <div className={`pl-4 rounded-l-xl ${isFormComplete ? "bg-[#FF5812] text-white" : "bg-[#D3D5D8]"}`}>
             Add test details
           </div>
           <div className="bg-[#D3D5D8] pl-4">Add modules</div>

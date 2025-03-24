@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="flex justify-between items-center px-6 p-2">
+      <nav className="flex justify-between items-center px-6 p-3">
         <div className="flex items-center">
           <img src="logo.png" className="w-48 h-12 text-2xl" alt="logo" />
         </div>

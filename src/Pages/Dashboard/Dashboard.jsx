@@ -283,6 +283,7 @@ const Dashboard = () => {
 
   return (
     <>
+    <div className="h-screen overflow-y-auto flex flex-col no-scrollbar">
       <Header />
       <div>
         <div className="px-6 flex bg-[#F6F7F7]  justify-between pt-6 pb-8 items-center overflow-y-auto no-scrollbar">
@@ -336,6 +337,7 @@ const Dashboard = () => {
           <Cardcontainer filteredCards={filteredCards} />
 
         </div>
+      </div>
       </div>
     </>
   );
