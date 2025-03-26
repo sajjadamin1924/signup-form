@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import countryList from "react-select-country-list";
@@ -6,12 +6,8 @@ import Header from "../Components/Header";
 import { FaRegFileAlt } from "react-icons/fa";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { CiCirclePlus } from "react-icons/ci";
+import { Context } from "../context/Context";
 
-const industryOptions = [
-  { value: "accountancy", label: "Accountancy" },
-  { value: "banking", label: "Banking" },
-  { value: "corporate finance", label: "Corporate Finance" },
-];
 
 const roleOptions = [
   { value: "corporate banking operations manager", label: "Corporate Banking Operations Manager" },
@@ -24,9 +20,6 @@ const workArrangementOptions = [
   { value: "hybrid", label: "Hybrid" },
   { value: "onsite", label: "On-site" },
 ];
-
-const industryOptionsWithAll = [{ value: "all", label: "Select All" }, ...industryOptions];
-const roleOptionsWithAll = [{ value: "all", label: "Select All" }, ...roleOptions];
 
 const roleNameStyles = {
   control: (provided) => ({
@@ -59,7 +52,12 @@ const getCustomOptions = (options) =>
     ),
   }));
 
+
 const Createnewtest = () => {
+
+  const {formattedIndustries,formattedRoles} = useContext(Context);
+  const industryOptionsWithAll = [{ value: "all", label: "Select All" }, ...formattedIndustries];
+  const roleOptionsWithAll = [{ value: "all", label: "Select All" }, ...formattedRoles];
   const navigate = useNavigate();
   
   const [selectedIndustry, setSelectedIndustry] = useState([]);
@@ -76,7 +74,7 @@ const Createnewtest = () => {
 
   const handleIndustryChange = (selected) => {
     if (selected.some((option) => option.value === "all")) {
-      setSelectedIndustry(industryOptions);
+      setSelectedIndustry(formattedIndustries);
     } else {
       setSelectedIndustry(selected);
     }
@@ -84,7 +82,7 @@ const Createnewtest = () => {
 
   const handleRoleChange = (selected) => {
     if (selected.some((option) => option.value === "all")) {
-      setSelectedRole(roleOptions);
+      setSelectedRole(formattedRoles);
     } else {
       setSelectedRole(selected);
     }
