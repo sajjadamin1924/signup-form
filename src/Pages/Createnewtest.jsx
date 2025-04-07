@@ -9,11 +9,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { Context } from "../context/Context";
 
 
-const roleOptions = [
-  { value: "corporate banking operations manager", label: "Corporate Banking Operations Manager" },
-  { value: "customer experience analyst", label: "Customer Experience Analyst" },
-  { value: "customer service operations specialist", label: "Customer Service Operations Specialist" },
-];
+
 
 const workArrangementOptions = [
   { value: "remote", label: "Remote" },

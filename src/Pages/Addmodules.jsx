@@ -117,11 +117,12 @@ const Addmodules = () => {
 
           {/* Right: Available Modules Section (Cards) */}
           <div className="flex-1 p-6 bg-white shadow-lg rounded-lg ml-6 ">
-            <div className="flex space-x-4 items-center">
+            <div className="flex space-x-4">
               
               <h2 className="text-lg font-semibold">suggested Modules</h2>
               <h2 className="text-lg font-semibold">All modules</h2>
-              <div className="p-2 ">
+              <div className="p-2 items-end
+               ">
               <input type="text"
               placeholder="search test module by library here" />
             </div>
